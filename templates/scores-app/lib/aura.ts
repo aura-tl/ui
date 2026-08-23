@@ -34,6 +34,10 @@ export type AuraPlayPage = { items: AuraPlay[] };
 
 export type AuraBoxScore = {
   observedAt?: number;
+  teams?: Array<{
+    away?: AuraBoxScoreTeam;
+    home?: AuraBoxScoreTeam;
+  }>;
   players?: Array<{
     team?: { abbreviation?: string; displayName?: string };
     statistics?: Array<{
@@ -47,6 +51,21 @@ export type AuraBoxScore = {
       }>;
     }>;
   }>;
+};
+
+export type AuraBoxScorePlayer = {
+  person?: { fullName?: string };
+  position?: { abbreviation?: string };
+  battingOrder?: string;
+  stats?: {
+    batting?: Record<string, string | number>;
+    pitching?: Record<string, string | number>;
+  };
+};
+
+export type AuraBoxScoreTeam = {
+  team?: { name?: string };
+  players?: Record<string, AuraBoxScorePlayer>;
 };
 
 export type AuraOdds = {

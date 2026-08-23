@@ -5,6 +5,7 @@ import {
   getAuraGameDetail,
   listAuraGames,
   type AuraBoxScore,
+  type AuraBoxScorePlayer,
   type AuraGame,
   type AuraGameDetail,
   type AuraOdds,
@@ -232,27 +233,22 @@ function Plays({ plays }: { plays: AuraPlay[] }) {
 }
 
 function BoxScore({ boxscore }: { boxscore: AuraBoxScore | null }) {
-  const groups = boxscore?.players || [];
-  if (!groups.length) return <Message>No box score is available for this game yet.</Message>;
-  return <div className="boxscore">{groups.map((group, groupIndex) => {
-    const table = group.statistics?.find((entry) => entry.type === 'batting') || group.statistics?.[0];
-    const labels = table?.labels || table?.names || [];
-    const columns = usefulColumns(labels);
-    return (
-      <section key={`${group.team?.abbreviation || 'team'}:${groupIndex}`}>
-        <header><strong>{group.team?.displayName || group.team?.abbreviation || 'Team'}</strong><span>{table?.type || 'Players'}</span></header>
+  const tables = boxScoreTables(boxscore);
+  if (!tables.length) return <Message>No box score is available for this game yet.</Message>;
+  return <div className="boxscore">{tables.map((table, tableIndex) => (
+      <section key={`${table.team}:${table.kind}:${tableIndex}`}>
+        <header><strong>{table.team}</strong><span>{table.kind}</span></header>
         <div role="table">
-          <div role="row" className="boxscore__head"><span>Player</span>{columns.map((column) => <b key={column.index}>{column.label}</b>)}</div>
-          {(table?.athletes || []).filter((player) => player.athlete?.displayName).slice(0, 12).map((player, index) => (
-            <div role="row" key={`${player.athlete?.displayName}:${index}`}>
-              <span><strong>{player.athlete?.shortName || player.athlete?.displayName}</strong><small>{player.position?.abbreviation || ''}</small></span>
-              {columns.map((column) => <b key={column.index}>{player.stats?.[column.index] ?? '—'}</b>)}
+          <div role="row" className="boxscore__head"><span>Player</span>{table.columns.map((column) => <b key={column}>{column}</b>)}</div>
+          {table.rows.slice(0, 12).map((player, index) => (
+            <div role="row" key={`${player.name}:${index}`}>
+              <span><strong>{player.name}</strong><small>{player.position}</small></span>
+              {player.values.map((value, valueIndex) => <b key={valueIndex}>{value ?? '—'}</b>)}
             </div>
           ))}
         </div>
       </section>
-    );
-  })}</div>;
+  ))}</div>;
 }
 
 function Markets({ odds, props, game }: { odds: AuraOdds | null; props: AuraProps | null; game: AuraGame }) {
@@ -323,6 +319,66 @@ function usefulColumns(labels: string[]) {
   });
   if (selected.length) return selected.slice(0, 6);
   return labels.slice(0, 6).map((label, index) => ({ index, label }));
+}
+
+type BoxTable = {
+  team: string;
+  kind: string;
+  columns: string[];
+  rows: Array<{ name: string; position: string; values: Array<string | number | undefined> }>;
+};
+
+function boxScoreTables(boxscore: AuraBoxScore | null): BoxTable[] {
+  const retainedTeams = boxscore?.teams?.[0];
+  if (retainedTeams?.away || retainedTeams?.home) {
+    return [retainedTeams.away, retainedTeams.home].flatMap((team) => {
+      if (!team) return [];
+      const players = Object.values(team.players || {});
+      return [
+        retainedPlayerTable(team.team?.name || 'Away', 'Batting', players, [
+          ['AB', 'atBats'], ['R', 'runs'], ['H', 'hits'], ['RBI', 'rbi'], ['BB', 'baseOnBalls'], ['K', 'strikeOuts'],
+        ]),
+        retainedPlayerTable(team.team?.name || 'Home', 'Pitching', players, [
+          ['IP', 'inningsPitched'], ['H', 'hits'], ['R', 'runs'], ['ER', 'earnedRuns'], ['BB', 'baseOnBalls'], ['K', 'strikeOuts'],
+        ]),
+      ].filter((table): table is BoxTable => Boolean(table));
+    });
+  }
+  return (boxscore?.players || []).flatMap((group) => {
+    const table = group.statistics?.find((entry) => entry.type === 'batting') || group.statistics?.[0];
+    const labels = table?.labels || table?.names || [];
+    const columns = usefulColumns(labels);
+    const rows = (table?.athletes || []).filter((player) => player.athlete?.displayName).map((player) => ({
+      name: player.athlete?.shortName || player.athlete?.displayName || 'Player',
+      position: player.position?.abbreviation || '',
+      values: columns.map((column) => player.stats?.[column.index]),
+    }));
+    if (!rows.length) return [];
+    return [{
+      team: group.team?.displayName || group.team?.abbreviation || 'Team',
+      kind: table?.type || 'Players',
+      columns: columns.map((column) => column.label),
+      rows,
+    }];
+  });
+}
+
+function retainedPlayerTable(
+  team: string,
+  kind: 'Batting' | 'Pitching',
+  players: AuraBoxScorePlayer[],
+  columns: Array<[string, string]>
+): BoxTable | null {
+  const statKey = kind === 'Batting' ? 'batting' : 'pitching';
+  const rows = players
+    .filter((player) => Object.keys(player.stats?.[statKey] || {}).length > 0)
+    .sort((left, right) => Number(left.battingOrder || '9999') - Number(right.battingOrder || '9999'))
+    .map((player) => ({
+      name: player.person?.fullName || 'Player',
+      position: player.position?.abbreviation || '',
+      values: columns.map(([, key]) => player.stats?.[statKey]?.[key]),
+    }));
+  return rows.length ? { team, kind, columns: columns.map(([label]) => label), rows } : null;
 }
 
 function gameStatus(game: AuraGame) {
