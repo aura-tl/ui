@@ -29,7 +29,7 @@ account-wide monthly allowance and appears under this key in Aura Ops.
 
 ## Give this to an agent
 
-> Create an Aura scores app with `npx --yes --package=github:aura-tl/ui#v0.2.2 -- aura-ui create scores-app --cwd aura-scores`.
+> Create an Aura scores app with `npx --yes --package=github:aura-tl/ui#v0.3.0 -- aura-ui create scores-app --cwd aura-scores`.
 > Keep direct browser REST polling and the existing MLB, WNBA, and NFL tabs.
 > Ask me to sign in at aura.tl/account and create a browser key for localhost
 > plus my exact hosted domain. Put it in `.env.local`, never invent data, run the
