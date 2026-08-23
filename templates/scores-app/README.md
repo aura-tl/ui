@@ -1,6 +1,6 @@
 # Aura Scores
 
-A deployable Next.js score center using Aura as its only sports data system.
+A deployable Next.js live scores and game-detail app using Aura as its only sports data system.
 Anonymous visitors call Aura directly with your read-only public key, so every
 request and response byte remains attributed to your account.
 
@@ -13,9 +13,12 @@ request and response byte remains attributed to your account.
 4. Run `npm install`, then `npm run dev`.
 5. Open `http://localhost:3000`.
 
-The app makes one bounded `GET /api/games?view=scoreboard` request. It polls
-every 15 seconds while games are live, every 60 seconds while games are
-scheduled, and pauses whenever the tab is hidden. It never opens realtime.
+The scoreboard puts live games first and polls one bounded
+`GET /api/games?view=scoreboard` request every 15 seconds while games are live,
+every 60 seconds while games are scheduled, and pauses whenever the tab is
+hidden. Changed scores and states flash briefly. Opening a game reads its recent
+plays, box score, moneyline consensus, and player props directly from Aura;
+unavailable products say so instead of inventing data.
 
 ## Deploy to Vercel
 
@@ -26,8 +29,9 @@ account-wide monthly allowance and appears under this key in Aura Ops.
 
 ## Give this to an agent
 
-> Create an Aura scores app with `npx --yes --package=github:aura-tl/ui#v0.1.0 -- aura-ui create scores-app --cwd aura-scores`.
+> Create an Aura scores app with `npx --yes --package=github:aura-tl/ui#v0.2.0 -- aura-ui create scores-app --cwd aura-scores`.
 > Keep direct browser REST polling and the existing MLB, WNBA, and NFL tabs.
 > Ask me to sign in at aura.tl/account and create a browser key for localhost
 > plus my exact hosted domain. Put it in `.env.local`, never invent data, run the
-> production build, and deploy the app to my Vercel account.
+> production build, and deploy the app to my Vercel account. Preserve its
+> live-first order, game detail, honest unavailable states, and visible updates.
