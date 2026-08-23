@@ -216,7 +216,7 @@ function GameDetail({ game, changed, onBack }: { game: AuraGame; changed: boolea
         {status === 'ready' && tab === 'boxscore' && <BoxScore boxscore={detail?.boxscore || null} />}
         {status === 'ready' && tab === 'markets' && <Markets odds={detail?.odds || null} props={detail?.props || null} game={game} />}
       </div>
-      <footer>{updatedAt ? `Updated ${formatClock(updatedAt)}` : 'Loading'}{game.phase === 'in_progress' ? ' · Live REST every 15 seconds' : ''}</footer>
+      <footer>{updatedAt ? `Updated ${formatClock(updatedAt)}` : 'Loading'}{game.phase === 'in_progress' ? ` · Live REST every ${tab === 'boxscore' ? 30 : 15} seconds` : ''}</footer>
     </section>
   );
 }
@@ -344,8 +344,7 @@ function boxScoreTables(boxscore: AuraBoxScore | null): BoxTable[] {
       ].filter((table): table is BoxTable => Boolean(table));
     });
   }
-  return (boxscore?.players || []).flatMap((group) => {
-    const table = group.statistics?.find((entry) => entry.type === 'batting') || group.statistics?.[0];
+  return (boxscore?.players || []).flatMap((group) => (group.statistics || []).flatMap((table) => {
     const labels = table?.labels || table?.names || [];
     const columns = usefulColumns(labels);
     const rows = (table?.athletes || []).filter((player) => player.athlete?.displayName).map((player) => ({
@@ -356,11 +355,11 @@ function boxScoreTables(boxscore: AuraBoxScore | null): BoxTable[] {
     if (!rows.length) return [];
     return [{
       team: group.team?.displayName || group.team?.abbreviation || 'Team',
-      kind: table?.type || 'Players',
+      kind: table?.type || table?.name || table?.text || 'Players',
       columns: columns.map((column) => column.label),
       rows,
     }];
-  });
+  }));
 }
 
 function retainedPlayerTable(

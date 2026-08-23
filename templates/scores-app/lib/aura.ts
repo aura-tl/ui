@@ -42,6 +42,8 @@ export type AuraBoxScore = {
     team?: { abbreviation?: string; displayName?: string };
     statistics?: Array<{
       type?: string;
+      name?: string;
+      text?: string;
       labels?: string[];
       names?: string[];
       athletes?: Array<{
