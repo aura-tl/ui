@@ -101,7 +101,7 @@ export function ScoreCenter() {
           </nav>
           <div className="score-center__date">
             <button aria-label="Previous day" onClick={() => setDate(moveDate(date, -1))}>←</button>
-            <strong>{formatDate(date)}</strong>
+            <strong suppressHydrationWarning>{formatDate(date)}</strong>
             <button aria-label="Next day" onClick={() => setDate(moveDate(date, 1))}>→</button>
           </div>
           <div className="score-center__games" aria-live="polite">
