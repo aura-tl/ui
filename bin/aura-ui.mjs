@@ -119,8 +119,8 @@ async function runTemplateCreate(parsed, io) {
     io.log('');
     io.log('Next:');
     io.log(`  cd ${path.relative(process.cwd(), cwd) || '.'}`);
-    io.log('  cp .env.example .env.local');
     io.log('  npm install');
+    io.log('  npx --yes --package=github:aura-tl/ui#v0.5.0 aura-connect --name "Aura app agent" --env .env.local --public-domain localhost:3000');
     io.log('  npm run dev');
   }
   return {

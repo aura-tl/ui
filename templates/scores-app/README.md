@@ -6,12 +6,11 @@ request and response byte remains attributed to your account.
 
 ## Run it
 
-1. Sign in at `https://aura.tl/account`.
-2. Create a browser key for the exact domains that will load the app, for
-   example `localhost:3000, my-aura-scores.vercel.app`.
-3. Copy `.env.example` to `.env.local` and paste the key once.
-4. Run `npm install`, then `npm run dev`.
-5. Open `http://localhost:3000`.
+1. Run `npx --yes --package=github:aura-tl/ui#v0.5.0 aura-connect --name
+   "Scores agent" --env .env.local --public-domain localhost:3000`.
+2. Open the printed Aura URL, sign in, and approve the displayed keys.
+3. Run `npm install`, then `npm run dev`.
+4. Open `http://localhost:3000`.
 
 The scoreboard puts live games first and polls one bounded
 `GET /api/games?view=scoreboard` request every 15 seconds while games are live,
@@ -22,17 +21,19 @@ unavailable products say so instead of inventing data.
 
 ## Deploy to Vercel
 
-Import this directory in Vercel and add both variables from `.env.local`.
-Choose the final Vercel domain before creating the Aura browser key; Aura uses
-exact domains, not wildcards. Every anonymous visitor then spends the same
-account-wide monthly allowance and appears under this key in Aura Ops.
+Import this directory in Vercel and add `NEXT_PUBLIC_AURA_API_URL` plus
+`NEXT_PUBLIC_AURA_PUBLIC_KEY` from `.env.local`. Keep `AURA_API_KEY` private and
+out of browser configuration. Choose the final Vercel domain before creating
+the Aura browser key; Aura uses exact domains, not wildcards. Every anonymous
+visitor then spends the same account-wide monthly allowance and appears under
+this key in Aura Ops.
 
 ## Give this to an agent
 
-> Create an Aura scores app with `npx --yes --package=github:aura-tl/ui#v0.3.2 -- aura-ui create scores-app --cwd aura-scores`.
+> Create an Aura scores app with `npx --yes --package=github:aura-tl/ui#v0.5.0 -- aura-ui create scores-app --cwd aura-scores`.
 > Keep direct browser REST polling and the existing MLB, WNBA, and NFL tabs.
-> Ask me to sign in at aura.tl/account and create a browser key for localhost
-> plus my exact hosted domain. Put it in `.env.local`, never invent data, run the
+> Run `aura-connect` for localhost plus my exact hosted domain and ask me to
+> approve the displayed keys. Never invent data, run the
 > production build, and deploy the app to my Vercel account. Preserve its
 > live-first order, game detail, honest unavailable states, and visible updates.
 The linked Aura watermark lives in `components/aura-watermark.tsx`. Remove `AuraWatermark` from `app/layout.tsx` when you want to ship without attribution.

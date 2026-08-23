@@ -1,8 +1,10 @@
 {
   "name": "aura-tl",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "type": "module",
   "bin": {
+    "aura-connect": "./bin/aura-connect.mjs",
+    "aura-mcp": "./bin/aura-mcp.mjs",
     "aura-ui": "./bin/aura-ui.mjs"
   },
   "files": [
