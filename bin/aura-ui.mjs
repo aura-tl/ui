@@ -92,19 +92,15 @@ export async function runAuraUi(argv, io = console, runtime = {}) {
 }
 
 async function runTemplateCreate(parsed, io) {
-  if (parsed.component !== 'scores-app') {
-    throw new Error('Unknown Aura app template. Choose scores-app.');
+  const screen = productApps[parsed.component];
+  if (parsed.component !== 'scores-app' && parsed.component !== 'showcase-host' && !screen) {
+    throw new Error(`Unknown Aura app template. Choose ${Object.keys(productApps).join(', ')}, scores-app, or showcase-host.`);
   }
   if (parsed.force || parsed.gameId || parsed.envFile !== '.env.local') {
     throw new Error('create accepts only --cwd and --dry-run.');
   }
-  const cwd = path.resolve(parsed.cwd || path.join(process.cwd(), 'aura-scores'));
-  const sourceRoot = path.join(packageRoot, 'templates', parsed.component);
-  const sources = await templateFiles(sourceRoot);
-  const files = sources.map((source) => ({
-    source,
-    destination: source === 'gitignore' ? '.gitignore' : source,
-  }));
+  const cwd = path.resolve(parsed.cwd || path.join(process.cwd(), `aura-${parsed.component}`));
+  const files = await templatePlan(parsed.component, screen);
   for (const file of files) {
     if (await exists(path.join(cwd, file.destination))) {
       throw new Error(`${file.destination} already exists. Aura UI will not overwrite an app.`);
@@ -114,10 +110,10 @@ async function runTemplateCreate(parsed, io) {
     for (const file of files) {
       const destination = path.join(cwd, file.destination);
       await mkdir(path.dirname(destination), { recursive: true });
-      await copyFile(path.join(sourceRoot, file.source), destination);
+      await copyFile(file.source, destination);
     }
   }
-  io.log(`${parsed.dryRun ? 'Would create' : 'Created'} Aura Scores at ${cwd}`);
+  io.log(`${parsed.dryRun ? 'Would create' : 'Created'} ${templateNames[parsed.component]} at ${cwd}`);
   for (const file of files) io.log(`  ${parsed.dryRun ? '○' : '✓'} ${file.destination}`);
   if (!parsed.dryRun) {
     io.log('');
@@ -134,6 +130,60 @@ async function runTemplateCreate(parsed, io) {
     files: files.map((file) => file.destination),
     dryRun: parsed.dryRun,
   };
+}
+
+const productApps = {
+  'sportsbook-app': 'sportsbook',
+  'props-app': 'props',
+  'arbitrage-app': 'arbitrage',
+  'model-app': 'model',
+  'fantasy-draft-app': 'fantasy-draft',
+  'dfs-lineup-app': 'dfs-lineup',
+};
+
+const templateNames = {
+  'scores-app': 'Aura Scores',
+  'showcase-host': 'Aura Showcase Host',
+  'sportsbook-app': 'Aura Sportsbook',
+  'props-app': 'Aura Props',
+  'arbitrage-app': 'Aura Arbitrage Watch',
+  'model-app': 'Aura Model Lab',
+  'fantasy-draft-app': 'Aura Fantasy Draft',
+  'dfs-lineup-app': 'Aura DFS Lineup',
+};
+
+async function templatePlan(template, screen) {
+  if (template === 'scores-app') return filesFrom('scores-app');
+  let common = await filesFrom('product-common');
+  if (template === 'showcase-host') {
+    const host = await filesFrom('showcase-host');
+    const screens = ['scores', ...Object.values(productApps)].map((name) => ({
+      source: path.join(packageRoot, 'templates', 'product-screens', `${name}.tsx`),
+      destination: `components/${name}.tsx`,
+    }));
+    return [...common, ...host, ...screens];
+  }
+  if (!['model', 'fantasy-draft', 'dfs-lineup'].includes(screen)) {
+    common = common.filter((file) => file.destination !== 'hooks/use-draft.ts');
+  } else {
+    common = common.filter((file) => file.destination !== 'hooks/use-slate.ts');
+  }
+  return [
+    ...common,
+    ...await filesFrom('product-app'),
+    {
+      source: path.join(packageRoot, 'templates', 'product-screens', `${screen}.tsx`),
+      destination: 'app/product.tsx',
+    },
+  ];
+}
+
+async function filesFrom(template) {
+  const root = path.join(packageRoot, 'templates', template);
+  return (await templateFiles(root)).map((source) => ({
+    source: path.join(root, source),
+    destination: source === 'gitignore' ? '.gitignore' : source,
+  }));
 }
 
 async function templateFiles(root, directory = '') {
@@ -613,7 +663,7 @@ function help() {
 Copy editable sports components and complete apps powered by Aura.
 
 Usage:
-  aura-ui create scores-app [--cwd <new-app>] [--dry-run]
+  aura-ui create <app> [--cwd <new-app>] [--dry-run]
   aura-ui add live-scoreboard [--cwd <app>] [--dry-run] [--force]
   aura-ui add rest-scoreboard [--cwd <app>] [--dry-run] [--force]
   aura-ui add live-gamecast [--cwd <app>] [--dry-run] [--force]

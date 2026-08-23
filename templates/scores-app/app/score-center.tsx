@@ -91,7 +91,7 @@ export function ScoreCenter() {
       ) : (
         <>
           <header className="score-center__hero">
-            <div><small>Powered by Aura</small><h1>Scores</h1></div>
+            <div><small>Live sports</small><h1>Scores</h1></div>
             <span className={live ? 'is-live' : ''}>{live ? `${live} live` : 'Latest'}</span>
           </header>
           <nav className="score-center__sports" aria-label="Sports">

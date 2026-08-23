@@ -109,6 +109,12 @@ main { display: grid; min-height: 100vh; place-items: start center; padding: 64p
 
 @keyframes live-pulse { 50% { opacity: .35; transform: scale(.75); } }
 @keyframes data-update { 0%, 100% { background-color: transparent; } 18% { background-color: rgba(157,125,232,.16); } }
+.aura-mark { position:fixed; z-index:20; right:18px; bottom:18px; display:flex; align-items:center; gap:9px; padding:7px 10px 7px 7px; border:1px solid rgba(185,180,170,.82); border-radius:999px; color:var(--text); background:rgba(255,254,250,.86); box-shadow:0 10px 30px rgba(70,61,42,.12),inset 0 0 18px #fff; backdrop-filter:blur(12px); text-decoration:none; transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease; animation:aura-float 5s ease-in-out infinite; }
+.aura-mark__orb { position:relative; display:grid; width:29px; aspect-ratio:1; place-items:center; overflow:hidden; border:1px solid #c7c2b7; border-radius:50%; background:#fff; color:#5552ba; font-weight:800; }
+.aura-mark__orb i { position:absolute; width:22px; height:1px; background:linear-gradient(90deg,transparent,#9d7de8,transparent); opacity:.45; transition:transform .45s ease; }.aura-mark__orb i:nth-child(2){transform:rotate(60deg)}.aura-mark__orb i:nth-child(3){transform:rotate(120deg)}
+.aura-mark>span:nth-child(2){display:grid;line-height:1}.aura-mark small{color:var(--faint);font:600 7px/1 ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase}.aura-mark strong{margin-top:3px;font-size:12px;letter-spacing:-.03em}.aura-mark>b{max-width:0;overflow:hidden;color:var(--live);font-size:11px;opacity:0;transition:max-width .25s ease,opacity .25s ease}
+.aura-mark:hover{transform:translateY(-3px) scale(1.03);border-color:color-mix(in srgb,var(--live) 48%,var(--line));box-shadow:0 16px 42px rgba(90,94,208,.18),inset 0 0 20px #fff;animation-play-state:paused}.aura-mark:hover .aura-mark__orb i:first-child{transform:rotate(180deg)}.aura-mark:hover .aura-mark__orb i:nth-child(2){transform:rotate(240deg)}.aura-mark:hover .aura-mark__orb i:nth-child(3){transform:rotate(300deg)}.aura-mark:hover>b{max-width:16px;opacity:1}
+@keyframes aura-float { 0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)} }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
@@ -127,4 +133,5 @@ main { display: grid; min-height: 100vh; place-items: start center; padding: 64p
   .game-detail__score > section span { display: none; }
   .play-list li { grid-template-columns: 72px minmax(0, 1fr); padding-inline: 16px; }
   .play-list li > b { display: none; }
+  .aura-mark { right:12px; bottom:12px; }
 }

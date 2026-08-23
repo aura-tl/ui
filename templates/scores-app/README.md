@@ -35,3 +35,4 @@ account-wide monthly allowance and appears under this key in Aura Ops.
 > plus my exact hosted domain. Put it in `.env.local`, never invent data, run the
 > production build, and deploy the app to my Vercel account. Preserve its
 > live-first order, game detail, honest unavailable states, and visible updates.
+The linked Aura watermark lives in `components/aura-watermark.tsx`. Remove `AuraWatermark` from `app/layout.tsx` when you want to ship without attribution.
