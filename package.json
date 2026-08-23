@@ -1,11 +1,10 @@
 {
-  "name": "aura-tl",
-  "version": "0.5.0",
+  "name": "@aura-tl/cli",
+  "version": "0.6.0",
+  "description": "Create Aura sports apps, connect approved API keys, and run Aura MCP.",
   "type": "module",
   "bin": {
-    "aura-connect": "./bin/aura-connect.mjs",
-    "aura-mcp": "./bin/aura-mcp.mjs",
-    "aura-ui": "./bin/aura-ui.mjs"
+    "aura": "./bin/aura.mjs"
   },
   "files": [
     "bin",
@@ -14,5 +13,13 @@
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aura-tl/ui.git"
+  },
+  "homepage": "https://aura.tl",
+  "engines": {
+    "node": ">=20"
   }
 }

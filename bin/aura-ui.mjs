@@ -16,8 +16,8 @@ export async function runAuraUi(argv, io = console, runtime = {}) {
   if (!parsed.component) {
     throw new Error(
       parsed.command === 'create'
-        ? 'Choose an app to create. Example: aura-ui create scores-app'
-        : `Choose a component to ${parsed.command}. Example: aura-ui ${parsed.command} live-scoreboard`
+        ? 'Choose an app to create. Example: aura create scores-app'
+        : `Choose a component to ${parsed.command}. Example: aura ${parsed.command} live-scoreboard`
     );
   }
   if (parsed.command === 'inspect') {
@@ -120,7 +120,7 @@ async function runTemplateCreate(parsed, io) {
     io.log('Next:');
     io.log(`  cd ${path.relative(process.cwd(), cwd) || '.'}`);
     io.log('  npm install');
-    io.log('  npx --yes --package=github:aura-tl/ui#v0.5.0 aura-connect --name "Aura app agent" --env .env.local --public-domain localhost:3000');
+    io.log('  npx @aura-tl/cli connect --name "Aura app agent" --env .env.local --public-domain localhost:3000');
     io.log('  npm run dev');
   }
   return {
@@ -472,7 +472,7 @@ async function loadInstalledRecipe(cwd, component) {
     recipe = JSON.parse(await readFile(recipePath, 'utf8'));
   } catch {
     throw new Error(
-      `${component} is not installed in ${cwd}. Run aura-ui add ${component} first.`
+      `${component} is not installed in ${cwd}. Run aura add ${component} first.`
     );
   }
   return {
@@ -663,13 +663,13 @@ function help() {
 Copy editable sports components and complete apps powered by Aura.
 
 Usage:
-  aura-ui create <app> [--cwd <new-app>] [--dry-run]
-  aura-ui add live-scoreboard [--cwd <app>] [--dry-run] [--force]
-  aura-ui add rest-scoreboard [--cwd <app>] [--dry-run] [--force]
-  aura-ui add live-gamecast [--cwd <app>] [--dry-run] [--force]
-  aura-ui add game-pulse [--cwd <app>] [--dry-run] [--force]
-  aura-ui inspect <component>
-  aura-ui doctor <component> [--cwd <app>] [--env-file .env.local] [--game-id <id>]
+  aura create <app> [--cwd <new-app>] [--dry-run]
+  aura add live-scoreboard [--cwd <app>] [--dry-run] [--force]
+  aura add rest-scoreboard [--cwd <app>] [--dry-run] [--force]
+  aura add live-gamecast [--cwd <app>] [--dry-run] [--force]
+  aura add game-pulse [--cwd <app>] [--dry-run] [--force]
+  aura inspect <component>
+  aura doctor <component> [--cwd <app>] [--env-file .env.local] [--game-id <id>]
 
 The installed source is yours to style. Its live data client, server route,
 streaming, replay, authentication, and metering remain Aura-specific.

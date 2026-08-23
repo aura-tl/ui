@@ -9,7 +9,11 @@ export async function connectAura(options = {}) {
   const apiUrl = String(options.apiUrl || DEFAULT_API_URL).replace(/\/$/, '');
   const name = String(options.name || 'Coding agent');
   const envPath = path.resolve(options.envPath || '.env.local');
+  const includeServer = options.server === true;
   const publicDomains = normalizeDomains(options.publicDomains || []);
+  if (!includeServer && publicDomains.length === 0) {
+    throw new Error('Request --server, --public-domain, or both.');
+  }
   const fetchImpl = options.fetchImpl || fetch;
   const sleep = options.sleep || ((milliseconds) =>
     new Promise((resolve) => setTimeout(resolve, milliseconds)));
@@ -21,7 +25,7 @@ export async function connectAura(options = {}) {
     body: JSON.stringify({
       name,
       keys: [
-        { type: 'server' },
+        ...(includeServer ? [{ type: 'server' }] : []),
         ...(publicDomains.length > 0
           ? [{ type: 'public', allowedDomains: publicDomains }]
           : []),
@@ -60,11 +64,11 @@ export async function connectAura(options = {}) {
       typeof result.secret === 'string' &&
       result.secret.startsWith('aura_public_')
     );
-    if (!server || (publicDomains.length > 0 && !publicKey)) {
+    if ((includeServer && !server) || (publicDomains.length > 0 && !publicKey)) {
       throw new Error('Aura returned an invalid connection result.');
     }
     await writeAuraEnv(envPath, apiUrl, {
-      server: server.secret,
+      ...(server ? { server: server.secret } : {}),
       ...(publicKey ? { public: publicKey.secret } : {}),
     });
     for (const result of payload.keys) {
@@ -94,8 +98,9 @@ export async function writeAuraEnv(envPath, apiUrl, keys) {
 
 export function mergeAuraEnv(existing, apiUrl, keys) {
   const replacements = new Map([
-    ['AURA_API_URL', apiUrl],
-    ['AURA_API_KEY', keys.server],
+    ...(keys.server ? [['AURA_API_URL', apiUrl]] : []),
+    ...(keys.server ? [['AURA_API_KEY', keys.server]] : []),
+    ...(keys.public ? [['NEXT_PUBLIC_AURA_API_URL', apiUrl]] : []),
     ...(keys.public ? [['NEXT_PUBLIC_AURA_PUBLIC_KEY', keys.public]] : []),
   ]);
   const found = new Set();
@@ -141,12 +146,18 @@ function responseError(status, payload) {
 }
 
 function parseArguments(argv) {
-  const options = { publicDomains: [] };
+  const options = { publicDomains: [], server: false };
   for (let index = 0; index < argv.length; index += 1) {
     const name = argv[index];
+    if (name === '--server') {
+      options.server = true;
+      continue;
+    }
     const value = argv[index + 1];
     if (!['--api-url', '--name', '--env', '--public-domain'].includes(name) || !value) {
-      throw new Error('Usage: aura-connect [--name "My agent"] [--env .env.local] [--public-domain localhost:3000]');
+      throw new Error(
+        'Usage: aura connect [--server] [--name "My agent"] [--env .env.local] [--public-domain localhost:3000]'
+      );
     }
     if (name === '--api-url') options.apiUrl = value;
     if (name === '--name') options.name = value;

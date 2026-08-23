@@ -6,9 +6,9 @@ request and response byte remains attributed to your account.
 
 ## Run it
 
-1. Run `npx --yes --package=github:aura-tl/ui#v0.5.0 aura-connect --name
+1. Run `npx @aura-tl/cli connect --name
    "Scores agent" --env .env.local --public-domain localhost:3000`.
-2. Open the printed Aura URL, sign in, and approve the displayed keys.
+2. Open the printed Aura URL, sign in, and approve the displayed public key.
 3. Run `npm install`, then `npm run dev`.
 4. Open `http://localhost:3000`.
 
@@ -30,10 +30,10 @@ this key in Aura Ops.
 
 ## Give this to an agent
 
-> Create an Aura scores app with `npx --yes --package=github:aura-tl/ui#v0.5.0 -- aura-ui create scores-app --cwd aura-scores`.
+> Create an Aura scores app with `npx @aura-tl/cli create scores-app --cwd aura-scores`.
 > Keep direct browser REST polling and the existing MLB, WNBA, and NFL tabs.
-> Run `aura-connect` for localhost plus my exact hosted domain and ask me to
-> approve the displayed keys. Never invent data, run the
+> Run `aura connect` for localhost plus my exact hosted domain and ask me to
+> approve the displayed public key. Never invent data, run the
 > production build, and deploy the app to my Vercel account. Preserve its
 > live-first order, game detail, honest unavailable states, and visible updates.
 The linked Aura watermark lives in `components/aura-watermark.tsx`. Remove `AuraWatermark` from `app/layout.tsx` when you want to ship without attribution.

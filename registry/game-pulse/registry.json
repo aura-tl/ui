@@ -113,6 +113,6 @@
     "2. Render fixtures/aura/game-pulse.ts immediately without a key.",
     "3. Set AURA_API_URL plus AURA_API_KEY, or AURA_API_URL plus RAPIDAPI_KEY and RAPIDAPI_HOST, in server-only environment variables.",
     "4. Bind createAuraLiveScoreboardClient() and useAuraGamePulse() to one Aura game id for paid live or replay data.",
-    "5. Run npx --yes --package=github:aura-tl/ui#v0.1.0 -- aura-ui doctor game-pulse to verify fixture or paid-data activation without exposing the credential."
+    "5. Run npx @aura-tl/cli doctor game-pulse to verify fixture or paid-data activation without exposing the credential."
   ]
 }

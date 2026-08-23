@@ -95,6 +95,6 @@
     "1. Import styles/aura-live-scoreboard.css once in your app shell.",
     "2. Set AURA_API_URL plus AURA_API_KEY, or AURA_API_URL plus RAPIDAPI_KEY and RAPIDAPI_HOST, in server-only environment variables.",
     "3. Render fixtures/aura/live-scoreboard.ts immediately, then bind createAuraLiveScoreboardClient() for paid Aura data.",
-    "4. Run npx --yes --package=github:aura-tl/ui#v0.1.0 -- aura-ui doctor live-scoreboard to verify fixture or paid-data activation without exposing the credential."
+    "4. Run npx @aura-tl/cli doctor live-scoreboard to verify fixture or paid-data activation without exposing the credential."
   ]
 }
