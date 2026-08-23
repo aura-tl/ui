@@ -1,0 +1,60 @@
+{
+  "id": "aura.sportsbook-board.react-next",
+  "component": "sportsbook-board",
+  "dataPlane": "aura-only",
+  "deliveryMode": "poll",
+  "dataManifest": {
+    "version": 1,
+    "component": "sportsbook-board",
+    "delivery": {
+      "primary": "poll",
+      "snapshot": [
+        "sportsbook-board"
+      ],
+      "intervalMs": 15000
+    },
+    "requests": [
+      {
+        "id": "sportsbook-board",
+        "method": "GET",
+        "path": "/api/showcase/sportsbook",
+        "view": "sportsbook",
+        "fields": [
+          "boards[].game",
+          "boards[].markets[].marketType",
+          "boards[].markets[].asOf",
+          "boards[].markets[].outcomes"
+        ],
+        "parameters": []
+      }
+    ],
+    "relationships": [
+      "Each current market is joined to one Game and its teams."
+    ],
+    "unavailable": [
+      "The public board is bounded acquired coverage.",
+      "Missing games, markets, prices, scores, and movement are never invented.",
+      "Selections are local product state and do not place wagers."
+    ]
+  },
+  "objects": [
+    "Game",
+    "Market",
+    "Team"
+  ],
+  "instructions": [
+    "Render the real retained fixture first.",
+    "Bind useAuraSportsbook() to poll the public board; the last good model survives a transient failure.",
+    "Price-change arrows appear only when a real retained outcome changes between polls.",
+    "The bet slip is local selection state only."
+  ],
+  "customization": {
+    "howTo": "Edit sports, filters, market columns, and selection behavior directly in the copied source.",
+    "fieldCatalogObjects": [
+      "Game",
+      "Market",
+      "Team"
+    ],
+    "docs": "docs/component-data-customization.md"
+  }
+}

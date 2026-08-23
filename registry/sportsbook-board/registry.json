@@ -1,0 +1,82 @@
+{
+  "id": "sportsbook-board",
+  "displayName": "Aura Sportsbook Board Starter",
+  "framework": "react-next-app-router",
+  "deliveryMode": "poll",
+  "dataPlane": "aura-only",
+  "dataManifest": {
+    "version": 1,
+    "component": "sportsbook-board",
+    "delivery": {
+      "primary": "poll",
+      "snapshot": [
+        "sportsbook-board"
+      ],
+      "intervalMs": 15000
+    },
+    "requests": [
+      {
+        "id": "sportsbook-board",
+        "method": "GET",
+        "path": "/api/showcase/sportsbook",
+        "view": "sportsbook",
+        "fields": [
+          "boards[].game",
+          "boards[].markets[].marketType",
+          "boards[].markets[].asOf",
+          "boards[].markets[].outcomes"
+        ],
+        "parameters": []
+      }
+    ],
+    "relationships": [
+      "Each current market is joined to one Game and its teams."
+    ],
+    "unavailable": [
+      "The public board is bounded acquired coverage.",
+      "Missing games, markets, prices, scores, and movement are never invented.",
+      "Selections are local product state and do not place wagers."
+    ]
+  },
+  "objects": [
+    "Game",
+    "Market",
+    "Team"
+  ],
+  "requires": [
+    "react",
+    "next"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "source": "sportsbook-types.ts",
+      "destination": "lib/aura/sportsbook-types.ts"
+    },
+    {
+      "source": "use-sportsbook.ts",
+      "destination": "hooks/aura/use-sportsbook.ts"
+    },
+    {
+      "source": "sportsbook-board.tsx",
+      "destination": "components/aura/sportsbook-board.tsx"
+    },
+    {
+      "source": "sportsbook-board.css",
+      "destination": "styles/aura-sportsbook-board.css"
+    },
+    {
+      "source": "fixture.ts",
+      "destination": "fixtures/aura/sportsbook-board.ts"
+    },
+    {
+      "source": "recipe.json",
+      "destination": "aura/recipes/sportsbook-board.json"
+    }
+  ],
+  "nextSteps": [
+    "1. Import styles/aura-sportsbook-board.css once.",
+    "2. Render the real retained fixture.",
+    "3. Bind useAuraSportsbook() for 15-second current-market polling."
+  ]
+}

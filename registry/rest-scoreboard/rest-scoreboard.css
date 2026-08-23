@@ -1,0 +1,44 @@
+.aura-rest-scoreboard {
+  display: grid;
+  gap: 1rem;
+  max-width: 44rem;
+  padding: 1.25rem;
+  border: 1px solid #e3e6ea;
+  border-radius: 1rem;
+  background: #ffffff;
+  color: #16181c;
+  font: 500 0.95rem/1.4 ui-sans-serif, system-ui, sans-serif;
+}
+
+.aura-rest-scoreboard__header,
+.aura-rest-scoreboard__teams,
+.aura-rest-scoreboard__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.aura-rest-scoreboard__eyebrow,
+.aura-rest-scoreboard__status,
+.aura-rest-scoreboard__footer,
+.aura-rest-scoreboard__team small,
+.aura-rest-scoreboard__phase span {
+  color: #646b74;
+  font-size: 0.75rem;
+}
+
+.aura-rest-scoreboard__eyebrow {
+  margin: 0 0 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.aura-rest-scoreboard h2 { margin: 0; font-size: 1.2rem; }
+.aura-rest-scoreboard__teams { align-items: stretch; }
+.aura-rest-scoreboard__team { display: grid; gap: 0.15rem; min-width: 8rem; }
+.aura-rest-scoreboard__team strong { font-size: 2.25rem; line-height: 1; }
+.aura-rest-scoreboard__team small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.aura-rest-scoreboard__phase { display: grid; align-content: center; justify-items: center; text-align: center; }
+.aura-rest-scoreboard__message { margin: 0; color: #c23d33; }
+

@@ -1,0 +1,70 @@
+{
+  "id": "aura.box-score.react-next",
+  "component": "box-score",
+  "dataPlane": "aura-only",
+  "deliveryMode": "poll",
+  "dataManifest": {
+    "version": 1,
+    "component": "box-score",
+    "delivery": {
+      "primary": "poll",
+      "snapshot": [
+        "box-score"
+      ],
+      "poll": {
+        "everyMs": 30000,
+        "while": "not-final",
+        "transport": "request-metered-rest"
+      }
+    },
+    "requests": [
+      {
+        "id": "box-score",
+        "method": "GET",
+        "path": "/api/games/{gameId}/boxscore",
+        "view": "box-score",
+        "fields": [
+          "gameId",
+          "sport",
+          "league",
+          "phase",
+          "teams",
+          "players"
+        ]
+      },
+      {
+        "id": "activation-coverage",
+        "method": "GET",
+        "path": "/api/coverage",
+        "view": "product-coverage",
+        "fields": [
+          "sports[].sport",
+          "sports[].availability"
+        ]
+      }
+    ],
+    "relationships": [
+      "Game.id -> BoxScore.gameId"
+    ],
+    "unavailable": [
+      "A game without a retained box score renders unavailable, never fixture rows.",
+      "Unknown sport-specific columns are omitted instead of guessed."
+    ]
+  },
+  "objects": [
+    "BoxScore",
+    "Coverage"
+  ],
+  "instructions": [
+    "Render auraBoxScoreFixture first.",
+    "Pass one client and game id to useAuraBoxScore().",
+    "Polling stops when the returned phase is final."
+  ],
+  "customization": {
+    "howTo": "To pull more or fewer fields, edit the fields= list in this component\u2019s client and the matching *-types.ts. Allowlists are published per object in GET /api/catalog (fieldCatalog); unknown or duplicate fields return 400.",
+    "fieldCatalogObjects": [
+      "boxscore"
+    ],
+    "docs": "docs/component-data-customization.md"
+  }
+}

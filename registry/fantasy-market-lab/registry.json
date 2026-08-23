@@ -1,0 +1,29 @@
+{
+  "id": "fantasy-market-lab",
+  "displayName": "Aura Fantasy ADP Comparison",
+  "framework": "react-next-app-router",
+  "deliveryMode": "fetch",
+  "dataPlane": "aura-only",
+  "dataManifest": {
+    "version": 1,
+    "component": "fantasy-market-lab",
+    "delivery": { "primary": "fetch", "snapshot": ["nfl-draft-market"] },
+    "requests": [
+      { "id": "nfl-draft-market", "method": "GET", "path": "/api/stats/nfl/draft", "view": "market", "fields": ["items[].playerId", "items[].teamId", "items[].name", "items[].position", "items[].updatedAt", "items[].draft.adp", "items[].draft.adpPositionRank", "items[].draft.overallRank", "items[].draft.positionRank"], "parameters": ["season=2026", "scoring=ppr", "view=market", "limit=250"] }
+    ],
+    "relationships": ["ADP and consensus ranks join on one player entity; gaps compare position rank within the selected scoring format."],
+    "unavailable": ["Players with ADP but no consensus rank remain visible.", "Missing ranks are never scored as zero."]
+  },
+  "objects": ["Player", "ResearchResult"],
+  "requires": ["react", "next"],
+  "registryDependencies": ["live-scoreboard"],
+  "files": [
+    { "source": "../../../react/src/FantasyMarketLab.tsx", "destination": "components/aura/fantasy-market-lab.tsx" },
+    { "source": "../fantasy-draft-board/fantasy-draft-types.ts", "destination": "components/aura/fantasyMarketTypes.ts" },
+    { "source": "fantasy-market-data.ts", "destination": "lib/aura/fantasy-market-data.ts" },
+    { "source": "use-fantasy-market.ts", "destination": "hooks/aura/use-fantasy-market.ts" },
+    { "source": "fantasy-market-lab.css", "destination": "styles/aura-fantasy-market-lab.css" },
+    { "source": "recipe.json", "destination": "aura/recipes/fantasy-market-lab.json" }
+  ],
+  "nextSteps": ["1. Import styles/aura-fantasy-market-lab.css once.", "2. Keep Aura credentials in the copied server route.", "3. Bind createAuraLiveScoreboardClient() to useAuraFantasyMarket().", "4. Change fantasy-market-data.ts when your agent adds or removes fields."]
+}

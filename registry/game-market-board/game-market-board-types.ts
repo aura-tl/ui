@@ -1,0 +1,9 @@
+import type { AuraLiveScoreboardGame, AuraOddsTimeline } from '@/lib/aura/live-scoreboard-types';
+import { toAuraOddsStripModel, type AuraOddsMarketType, type AuraOddsStripModel } from '@/lib/aura/odds-strip-types';
+export interface AuraGameMarketTeam { id: string; abbreviation: string; name: string; score: number | null; color: string; }
+export interface AuraGameMarketBoardModel { game: { id: string; league: string; status: string; away: AuraGameMarketTeam; home: AuraGameMarketTeam; }; market: AuraOddsStripModel; availableMarkets: AuraOddsMarketType[]; }
+export interface AuraGameMarketBoardState { status: 'loading' | 'ready' | 'unavailable' | 'error'; model: AuraGameMarketBoardModel | null; error: string | null; }
+export function toAuraGameMarketBoardModel(game: AuraLiveScoreboardGame, timeline: AuraOddsTimeline): AuraGameMarketBoardModel { const teams = object(game.teams); return { game: { id: String(game.gameId || timeline.gameId), league: String(game.league || game.sport || 'Game'), status: String(game.statusDetail || game.statusText || game.phase || 'Scheduled'), away: team(object(teams.away), 'away'), home: team(object(teams.home), 'home') }, market: toAuraOddsStripModel(game, timeline), availableMarkets: ['moneyline', 'spread', 'total'] }; }
+function team(value: Record<string, unknown>, side: string): AuraGameMarketTeam { return { id: String(value.id || side), abbreviation: String(value.abbreviation || side.slice(0, 3).toUpperCase()), name: String(value.displayName || value.shortName || value.name || side), score: numeric(value.score), color: String(value.color || '#aaa49a') }; }
+function object(value: unknown): Record<string, unknown> { return value && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : {}; }
+function numeric(value: unknown): number | null { const parsed = typeof value === 'number' ? value : Number(value); return Number.isFinite(parsed) ? parsed : null; }

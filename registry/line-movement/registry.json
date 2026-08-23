@@ -1,0 +1,31 @@
+{
+  "id": "line-movement",
+  "displayName": "Aura Line Movement",
+  "framework": "react-next-app-router",
+  "deliveryMode": "poll",
+  "dataPlane": "aura-only",
+  "dataManifest": {
+    "version": 1,
+    "component": "line-movement",
+    "delivery": { "primary": "poll", "snapshot": ["game-card", "odds-timeline"], "poll": { "everyMs": 60000, "transport": "request-metered-rest" } },
+    "requests": [
+      { "id": "game-card", "method": "GET", "path": "/api/games/{gameId}", "view": "card", "fields": ["id", "teams.away.abbreviation", "teams.home.abbreviation"] },
+      { "id": "odds-timeline", "method": "GET", "path": "/api/games/{gameId}/odds/timeline", "view": "chart-ready-market", "fields": ["gameId", "marketType", "points[].observedAt", "points[].outcomes[].side", "points[].outcomes[].line", "points[].outcomes[].price"], "parameters": ["marketType={moneyline|spread|total}", "limit={2..500}", "fields={points.observedAt,points.outcomes.side,points.outcomes.line,points.outcomes.price}"] },
+      { "id": "activation-coverage", "method": "GET", "path": "/api/coverage", "view": "product-coverage", "fields": ["sports[].sport", "sports[].availability"] }
+    ],
+    "relationships": ["Game.id -> OddsTimeline.gameId", "Game.teams.{side}.abbreviation -> rendered series label"],
+    "unavailable": ["Fewer than two retained market points renders line history unavailable.", "No historical points are synthesized from the current price."]
+  },
+  "objects": ["Game", "OddsTimeline", "Coverage"],
+  "requires": ["react", "next"],
+  "registryDependencies": ["odds-strip"],
+  "files": [
+    { "source": "line-movement-types.ts", "destination": "lib/aura/line-movement-types.ts" },
+    { "source": "use-line-movement.ts", "destination": "hooks/aura/use-line-movement.ts" },
+    { "source": "line-movement.tsx", "destination": "components/aura/line-movement.tsx" },
+    { "source": "line-movement.css", "destination": "styles/aura-line-movement.css" },
+    { "source": "fixture.ts", "destination": "fixtures/aura/line-movement.ts" },
+    { "source": "recipe.json", "destination": "aura/recipes/line-movement.json" }
+  ],
+  "nextSteps": ["1. Import styles/aura-line-movement.css once.", "2. Render the fixture immediately.", "3. Bind the Aura client, game id, and one market type."]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aura.fantasy-market-lab.react-next",
+  "component": "fantasy-market-lab",
+  "dataPlane": "aura-only",
+  "deliveryMode": "fetch",
+  "dataManifest": {
+    "version": 1,
+    "component": "fantasy-market-lab",
+    "delivery": { "primary": "fetch", "snapshot": ["nfl-draft-market"] },
+    "requests": [
+      { "id": "nfl-draft-market", "method": "GET", "path": "/api/stats/nfl/draft", "view": "market", "fields": ["items[].playerId", "items[].teamId", "items[].name", "items[].position", "items[].updatedAt", "items[].draft.adp", "items[].draft.adpPositionRank", "items[].draft.overallRank", "items[].draft.positionRank"], "parameters": ["season=2026", "scoring=ppr", "view=market", "limit=250"] }
+    ],
+    "relationships": ["ADP and consensus ranks join on one player entity; gaps compare position rank within the selected scoring format."],
+    "unavailable": ["Players with ADP but no consensus rank remain visible.", "Missing ranks are never scored as zero."]
+  },
+  "objects": ["Player", "ResearchResult"],
+  "instructions": ["Use useAuraFantasyMarket with the copied Aura client.", "Change fantasy-market-data.ts to extend the selected fields.", "Preserve unavailable rows instead of coercing missing ranks to zero."]
+}

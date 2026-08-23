@@ -1,0 +1,73 @@
+{
+  "id": "aura.fantasy-player-line.react-next",
+  "component": "fantasy-player-line",
+  "dataPlane": "aura-only",
+  "deliveryMode": "poll",
+  "dataManifest": {
+    "version": 1,
+    "component": "fantasy-player-line",
+    "delivery": {
+      "primary": "poll",
+      "snapshot": [
+        "box-score"
+      ],
+      "poll": {
+        "everyMs": 30000,
+        "transport": "request-metered-rest"
+      }
+    },
+    "requests": [
+      {
+        "id": "box-score",
+        "method": "GET",
+        "path": "/api/games/{gameId}/boxscore",
+        "view": "source-neutral-player-stats",
+        "fields": [
+          "gameId",
+          "sport",
+          "phase",
+          "teams",
+          "players[].playerId",
+          "players[].teamId",
+          "players[].displayName",
+          "players[].position",
+          "players[].stats"
+        ]
+      },
+      {
+        "id": "activation-coverage",
+        "method": "GET",
+        "path": "/api/coverage",
+        "view": "product-coverage",
+        "fields": [
+          "sports[].sport",
+          "sports[].availability"
+        ]
+      }
+    ],
+    "relationships": [
+      "BoxScore.players[].teamId -> BoxScore.teams[].teamId",
+      "Developer scoring rules \u00d7 retained player stats -> displayed points"
+    ],
+    "unavailable": [
+      "A player absent from the retained box score renders unavailable.",
+      "This component does not provide projections, rankings, injuries, or start/sit advice."
+    ]
+  },
+  "objects": [
+    "BoxScore",
+    "Coverage"
+  ],
+  "instructions": [
+    "Render auraFantasyPlayerLineFixture first.",
+    "Select a retained player by Aura id or exact display name.",
+    "Pass your league scoring rules; the included default is conventional PPR scoring."
+  ],
+  "customization": {
+    "howTo": "To pull more or fewer fields, edit the fields= list in this component\u2019s client and the matching *-types.ts. Allowlists are published per object in GET /api/catalog (fieldCatalog); unknown or duplicate fields return 400.",
+    "fieldCatalogObjects": [
+      "boxscore"
+    ],
+    "docs": "docs/component-data-customization.md"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "fantasy-draft-board",
+  "displayName": "Aura Fantasy Draft Board Starter",
+  "framework": "react-next-app-router",
+  "deliveryMode": "fetch",
+  "dataPlane": "aura-only",
+  "dataManifest": {
+    "version": 1,
+    "component": "fantasy-draft-board",
+    "delivery": { "primary": "fetch", "snapshot": ["nfl-draft"] },
+    "requests": [
+      { "id": "nfl-draft", "method": "GET", "path": "/api/stats/nfl/draft", "view": "page", "fields": ["items[].entityId", "items[].playerId", "items[].teamId", "items[].name", "items[].position", "items[].projection", "items[].draft", "items[].fantasy"], "parameters": ["season=2026", "scoring=ppr", "limit=250"] }
+    ],
+    "relationships": ["Projection and draft rank share one Player or Team entity id."],
+    "unavailable": ["Only retained 2026 entities render.", "Missing positions, teams, portraits, ranks, and projection depth are never invented."]
+  },
+  "objects": ["Player", "ResearchResult"],
+  "requires": ["react", "next"],
+  "registryDependencies": ["live-scoreboard"],
+  "files": [
+    { "source": "fantasy-draft-types.ts", "destination": "lib/aura/fantasy-draft-types.ts" },
+    { "source": "use-fantasy-draft.ts", "destination": "hooks/aura/use-fantasy-draft.ts" },
+    { "source": "fantasy-draft-board.tsx", "destination": "components/aura/fantasy-draft-board.tsx" },
+    { "source": "fantasy-draft-board.css", "destination": "styles/aura-fantasy-draft-board.css" },
+    { "source": "fixture.ts", "destination": "fixtures/aura/fantasy-draft-board.ts" },
+    { "source": "recipe.json", "destination": "aura/recipes/fantasy-draft-board.json" }
+  ],
+  "nextSteps": ["1. Import styles/aura-fantasy-draft-board.css once.", "2. Render the retained fixture.", "3. Set server-only Aura credentials and bind createAuraLiveScoreboardClient() to useAuraFantasyDraft()."]
+}

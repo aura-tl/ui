@@ -1,0 +1,194 @@
+{
+  "id": "aura.live-scoreboard.react-next",
+  "dataPlane": "aura-only",
+  "deliveryMode": "snapshot-plus-resumable-stream",
+  "dataManifest": {
+    "version": 1,
+    "component": "live-scoreboard",
+    "delivery": {
+      "primary": "stream",
+      "snapshot": [
+        "game",
+        "game-frame"
+      ],
+      "continuation": "game-frame-stream",
+      "resume": "Send the last durable event cursor as since; refresh Game and GameFrame only when Aura marks the cursor invalid.",
+      "terminal": "A final GameFrame closes the stream and remains the stable render state."
+    },
+    "requests": [
+      {
+        "id": "game",
+        "method": "GET",
+        "path": "/api/games/{gameId}",
+        "view": "card",
+        "fields": [
+          "id",
+          "sport",
+          "league",
+          "phase",
+          "startsAtMs",
+          "updatedAt",
+          "teams.away.id",
+          "teams.away.abbreviation",
+          "teams.away.shortName",
+          "teams.away.displayName",
+          "teams.away.name",
+          "teams.away.score",
+          "teams.away.color",
+          "teams.away.record",
+          "teams.home.id",
+          "teams.home.abbreviation",
+          "teams.home.shortName",
+          "teams.home.displayName",
+          "teams.home.name",
+          "teams.home.score",
+          "teams.home.color",
+          "teams.home.record"
+        ]
+      },
+      {
+        "id": "game-frame",
+        "method": "GET",
+        "path": "/api/games/{gameId}/frame",
+        "view": "atomic-frame",
+        "fields": [
+          "cursor",
+          "revision",
+          "gameId",
+          "observedAt",
+          "publishedAt",
+          "scoreboard.sport",
+          "scoreboard.league",
+          "scoreboard.phase",
+          "scoreboard.statusDetail",
+          "scoreboard.statusText",
+          "scoreboard.startsAt",
+          "scoreboard.updatedAt",
+          "scoreboard.away.id",
+          "scoreboard.away.abbreviation",
+          "scoreboard.away.shortName",
+          "scoreboard.away.displayName",
+          "scoreboard.away.name",
+          "scoreboard.away.score",
+          "scoreboard.away.color",
+          "scoreboard.away.record",
+          "scoreboard.home.id",
+          "scoreboard.home.abbreviation",
+          "scoreboard.home.shortName",
+          "scoreboard.home.displayName",
+          "scoreboard.home.name",
+          "scoreboard.home.score",
+          "scoreboard.home.color",
+          "scoreboard.home.record",
+          "freshness.dataAsOf",
+          "freshness.state",
+          "freshness.complete",
+          "freshness.missing",
+          "confidence.score",
+          "confidence.band",
+          "confidence.reasons"
+        ]
+      },
+      {
+        "id": "game-frame-stream",
+        "method": "GET",
+        "path": "/api/events/stream",
+        "view": "game.frame",
+        "fields": [
+          "id",
+          "createdAt",
+          "type",
+          "payload.cursor",
+          "payload.revision",
+          "payload.gameId",
+          "payload.observedAt",
+          "payload.publishedAt",
+          "payload.scoreboard.sport",
+          "payload.scoreboard.league",
+          "payload.scoreboard.phase",
+          "payload.scoreboard.statusDetail",
+          "payload.scoreboard.statusText",
+          "payload.scoreboard.startsAt",
+          "payload.scoreboard.updatedAt",
+          "payload.scoreboard.away.id",
+          "payload.scoreboard.away.abbreviation",
+          "payload.scoreboard.away.shortName",
+          "payload.scoreboard.away.displayName",
+          "payload.scoreboard.away.name",
+          "payload.scoreboard.away.score",
+          "payload.scoreboard.away.color",
+          "payload.scoreboard.away.record",
+          "payload.scoreboard.home.id",
+          "payload.scoreboard.home.abbreviation",
+          "payload.scoreboard.home.shortName",
+          "payload.scoreboard.home.displayName",
+          "payload.scoreboard.home.name",
+          "payload.scoreboard.home.score",
+          "payload.scoreboard.home.color",
+          "payload.scoreboard.home.record",
+          "payload.freshness.dataAsOf",
+          "payload.freshness.state",
+          "payload.freshness.complete",
+          "payload.freshness.missing",
+          "payload.confidence.score",
+          "payload.confidence.band",
+          "payload.confidence.reasons"
+        ],
+        "parameters": [
+          "type=game.frame",
+          "gameId={gameId}",
+          "since={durableCursor}"
+        ]
+      },
+      {
+        "id": "activation-coverage",
+        "method": "GET",
+        "path": "/api/coverage",
+        "view": "product-coverage",
+        "fields": [
+          "sports[].sport",
+          "sports[].capturePolicy"
+        ],
+        "purpose": "Credential-safe activation doctor and MLB/WNBA observed-live capability policy; not part of the render hot path."
+      }
+    ],
+    "relationships": [
+      "Game.id -> GameFrame.gameId",
+      "Game.id -> game.frame.gameId",
+      "Game.teams.away/home -> GameFrame.scoreboard.away/home"
+    ],
+    "unavailable": [
+      "A missing Game or GameFrame renders unavailable, never fixture data while connected.",
+      "Missing team metadata falls back only to source-neutral labels retained in the same GameFrame.",
+      "Freshness, completeness, and confidence gaps remain visible and independent.",
+      "An unexpected stream end keeps the last frame stale and resumes from the durable cursor."
+    ]
+  },
+  "objects": [
+    "Game",
+    "GameFrame",
+    "Coverage"
+  ],
+  "instructions": [
+    "Render auraLiveScoreboardFixture first; fixture mode never requires an API key.",
+    "Create one memoized createAuraLiveScoreboardClient() in a client component and pass it with an Aura gameId to useAuraLiveScoreboard().",
+    "The browser calls only /api/aura. Never add an Aura or RapidAPI key to client source, props, localStorage, or a URL.",
+    "Set AURA_API_URL plus AURA_API_KEY for direct Aura access, or AURA_API_URL plus RAPIDAPI_KEY and RAPIDAPI_HOST for Aura on RapidAPI.",
+    "Keep the generated server route Aura-specific. Do not turn it into an interchangeable sports-data provider adapter.",
+    "Customize the copied presentation freely, but key animation to model.cursor or model.revision and preserve all explicit connection states."
+  ],
+  "acceptance": [
+    "The fixture renders without network access.",
+    "Game and GameFrame snapshot through the same-origin Aura route.",
+    "The stream resumes from a durable cursor and closes at final.",
+    "No long-lived credential reaches the browser bundle or request URL.",
+    "Connecting, live, stale, final, replay, unavailable, and error remain visible states."
+  ],
+  "customization": {
+    "howTo": "To pull more or fewer fields, edit the fields= list in this component\u2019s client and the matching *-types.ts. Allowlists are published per object in GET /api/catalog (fieldCatalog); unknown or duplicate fields return 400.",
+    "fieldCatalogObjects": [
+      "game-detail"
+    ],
+    "docs": "docs/component-data-customization.md"
+  }
+}

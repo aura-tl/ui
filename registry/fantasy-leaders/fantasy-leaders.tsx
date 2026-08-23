@@ -1,0 +1,6 @@
+import * as React from 'react';
+import type { AuraFantasyLeadersModel, AuraFantasyLeadersState } from '@/lib/aura/fantasy-leaders-types';
+import './fantasy-leaders.css';
+export function AuraFantasyLeaders({ state, className = '' }: { state: AuraFantasyLeadersState; className?: string }) { return state.model ? <AuraFantasyLeadersView model={state.model} className={className} /> : <section className={`aura-fantasy-leaders ${className}`}><p className="aura-fantasy-leaders__empty">{state.error || 'Fantasy leaders unavailable.'}</p></section>; }
+export function AuraFantasyLeadersView({ model, className = '' }: { model: AuraFantasyLeadersModel; className?: string }) { return <section className={`aura-fantasy-leaders ${className}`.trim()}><header><div><small>{model.scoringLabel} scoring</small><h2>Game leaders</h2></div><span>{model.status}</span></header><div className="aura-fantasy-leaders__matchup">{model.title}</div><ol>{model.players.map((player, index) => <li key={player.playerId}><b>{index + 1}</b><span><strong>{player.name}</strong><small>{player.team} · {player.position}</small></span><em>{summary(player.stats)}</em><i>{player.points.toFixed(1)}</i></li>)}</ol></section>; }
+function summary(stats: Array<{ label: string; value: number }>) { return stats.slice(0, 2).map((stat) => `${stat.value} ${stat.label}`).join(' · '); }

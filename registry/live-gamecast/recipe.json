@@ -1,0 +1,261 @@
+{
+  "id": "aura.live-gamecast.react-next",
+  "dataPlane": "aura-only",
+  "deliveryMode": "complete-replay-plus-resumable-frame-stream",
+  "dataManifest": {
+    "version": 1,
+    "component": "live-gamecast",
+    "delivery": {
+      "primary": "stream",
+      "snapshot": [
+        "game",
+        "game-frame"
+      ],
+      "continuation": "game-frame-stream",
+      "replay": "Follow every game-plays-page nextCursor until hasMore is false.",
+      "resume": "Send the last durable event cursor as since; refresh the atomic snapshot only for an invalid cursor.",
+      "terminal": "A final frame closes live delivery; replay remains cursor-bounded and deterministic."
+    },
+    "requests": [
+      {
+        "id": "game",
+        "method": "GET",
+        "path": "/api/games/{gameId}",
+        "view": "card",
+        "fields": [
+          "id",
+          "sport",
+          "league",
+          "phase",
+          "startsAtMs",
+          "updatedAt",
+          "teams.away.id",
+          "teams.away.abbreviation",
+          "teams.away.shortName",
+          "teams.away.displayName",
+          "teams.away.name",
+          "teams.away.score",
+          "teams.away.color",
+          "teams.away.record",
+          "teams.home.id",
+          "teams.home.abbreviation",
+          "teams.home.shortName",
+          "teams.home.displayName",
+          "teams.home.name",
+          "teams.home.score",
+          "teams.home.color",
+          "teams.home.record"
+        ]
+      },
+      {
+        "id": "game-frame",
+        "method": "GET",
+        "path": "/api/games/{gameId}/frame",
+        "view": "atomic-gamecast-frame",
+        "fields": [
+          "cursor",
+          "revision",
+          "gameId",
+          "observedAt",
+          "publishedAt",
+          "scoreboard.sport",
+          "scoreboard.league",
+          "scoreboard.phase",
+          "scoreboard.statusDetail",
+          "scoreboard.statusText",
+          "scoreboard.startsAt",
+          "scoreboard.updatedAt",
+          "scoreboard.away.id",
+          "scoreboard.away.abbreviation",
+          "scoreboard.away.shortName",
+          "scoreboard.away.displayName",
+          "scoreboard.away.name",
+          "scoreboard.away.score",
+          "scoreboard.away.color",
+          "scoreboard.away.record",
+          "scoreboard.home.id",
+          "scoreboard.home.abbreviation",
+          "scoreboard.home.shortName",
+          "scoreboard.home.displayName",
+          "scoreboard.home.name",
+          "scoreboard.home.score",
+          "scoreboard.home.color",
+          "scoreboard.home.record",
+          "state.surface",
+          "state.label",
+          "state.possessionTeamId",
+          "state.coordinates.x",
+          "state.coordinates.y",
+          "play.id",
+          "play.sequence",
+          "play.wallclock",
+          "play.occurredAt",
+          "play.observedAt",
+          "play.updated",
+          "play.text",
+          "play.type",
+          "play.scoringPlay",
+          "play.scoring",
+          "play.period",
+          "play.clock",
+          "play.awayScore",
+          "play.homeScore",
+          "play.coordinates.x",
+          "play.coordinates.y",
+          "play.participants",
+          "play.participantRoles",
+          "play.participantIds",
+          "featuredPlayer.id",
+          "featuredPlayer.name",
+          "featuredPlayer.team",
+          "featuredPlayer.role",
+          "featuredPlayer.headshotUrl",
+          "featuredPlayer.stats[].key",
+          "featuredPlayer.stats[].label",
+          "featuredPlayer.stats[].value",
+          "featuredPlayer.stats[].delta",
+          "featuredPlayer.statsAsOf",
+          "featuredPlayer.statsMode",
+          "featuredPlayer.statsComplete",
+          "freshness.dataAsOf",
+          "freshness.complete",
+          "freshness.missing",
+          "changes.score",
+          "changes.featuredPlayer",
+          "changes.position"
+        ]
+      },
+      {
+        "id": "game-plays-page",
+        "method": "GET",
+        "path": "/api/games/{gameId}/plays/page",
+        "view": "play-page",
+        "fields": [
+          "gameId",
+          "pageSize",
+          "items[].id",
+          "items[].sequence",
+          "items[].wallclock",
+          "items[].occurredAt",
+          "items[].observedAt",
+          "items[].updated",
+          "items[].text",
+          "items[].type",
+          "items[].scoringPlay",
+          "items[].period",
+          "items[].clock",
+          "items[].awayScore",
+          "items[].homeScore",
+          "items[].coordinates",
+          "items[].participants",
+          "items[].participantIds",
+          "hasMore",
+          "nextCursor"
+        ],
+        "parameters": [
+          "pageSize=250",
+          "cursor={opaqueCursor}"
+        ]
+      },
+      {
+        "id": "player-game-lines",
+        "method": "GET",
+        "path": "/api/games/{gameId}/player-stats",
+        "view": "game-lines",
+        "fields": [
+          "id",
+          "canonicalPlayerId",
+          "playerName",
+          "teamName",
+          "position",
+          "observedAt",
+          "updated",
+          "stats.points",
+          "stats.rebounds",
+          "stats.assists",
+          "stats.steals",
+          "stats.hits",
+          "stats.runs",
+          "stats.RBIs",
+          "stats.homeRuns"
+        ]
+      },
+      {
+        "id": "featured-player",
+        "method": "GET",
+        "path": "/api/players/{playerId}",
+        "view": "card",
+        "fields": [
+          "id",
+          "name.display",
+          "currentTeam.abbreviation",
+          "position.abbreviation",
+          "media.headshot"
+        ]
+      },
+      {
+        "id": "game-frame-stream",
+        "method": "GET",
+        "path": "/api/events/stream",
+        "view": "game.frame",
+        "fields": [
+          "id",
+          "createdAt",
+          "type",
+          "payload"
+        ],
+        "payloadRequest": "game-frame",
+        "parameters": [
+          "type=game.frame",
+          "gameId={gameId}",
+          "since={durableCursor}"
+        ]
+      }
+    ],
+    "relationships": [
+      "Game.id -> GameFrame.gameId",
+      "Game.id -> GamePlayPage.gameId",
+      "GamePlay.participantIds -> Player.id",
+      "Player.id -> PlayerGameStat.canonicalPlayerId",
+      "Game.id -> game.frame.gameId"
+    ],
+    "unavailable": [
+      "A missing play archive renders unavailable instead of substituting fixture plays.",
+      "Coordinates and possession render only when retained on the selected frame.",
+      "A player card may render without media, role, or a game line; those dimensions remain independently unavailable.",
+      "Replay labels a latest-only player line and never presents it as the historical at-frame value.",
+      "A stalled replay cursor fails explicitly; a transient live error keeps the last frame stale and resumes."
+    ]
+  },
+  "objects": [
+    "Game",
+    "GamePlayPage",
+    "Player",
+    "PlayerGameStat",
+    "GameFrame"
+  ],
+  "instructions": [
+    "Render auraGamecastFixture first; fixture mode never requires an API key.",
+    "Create one memoized createAuraLiveScoreboardClient() and pass it with an Aura gameId to useAuraLiveGamecast().",
+    "Use replay mode for a complete cursor-paginated retained play archive and live mode for an atomic snapshot followed by resumable game.frame events.",
+    "The browser calls only /api/aura. Never add an Aura or RapidAPI credential to client source, props, localStorage, or a URL.",
+    "Set AURA_API_URL plus AURA_API_KEY for direct Aura access, or AURA_API_URL plus RAPIDAPI_KEY and RAPIDAPI_HOST for Aura on RapidAPI.",
+    "Customize the copied markup and CSS freely, but key animation to frame.cursor and preserve reduced motion, freshness, missing-data, latest-line, and at-frame-line semantics."
+  ],
+  "acceptance": [
+    "The fixture renders without network access.",
+    "Replay follows every plays/page cursor until hasMore is false and fails if pagination stalls.",
+    "Live mode hydrates from Game plus GameFrame and resumes the filtered game.frame stream from a durable cursor.",
+    "The server bridge allows only the exact Aura objects required by the component.",
+    "No long-lived credential reaches the browser bundle or request URL.",
+    "Connecting, live, stale, final, replay, unavailable, and error remain visible states."
+  ],
+  "customization": {
+    "howTo": "To pull more or fewer fields, edit the fields= list in this component\u2019s client and the matching *-types.ts. Allowlists are published per object in GET /api/catalog (fieldCatalog); unknown or duplicate fields return 400.",
+    "fieldCatalogObjects": [
+      "game-detail",
+      "game-play"
+    ],
+    "docs": "docs/component-data-customization.md"
+  }
+}

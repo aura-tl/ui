@@ -1,0 +1,81 @@
+{
+  "id": "aura.mobile-score-center.react-next",
+  "component": "mobile-score-center",
+  "dataPlane": "aura-only",
+  "deliveryMode": "poll",
+  "dataManifest": {
+    "version": 1,
+    "component": "mobile-score-center",
+    "delivery": {
+      "primary": "poll",
+      "snapshot": [
+        "daily-slate"
+      ],
+      "poll": {
+        "everyMs": 30000,
+        "while": "contains-live-game",
+        "transport": "request-metered-rest"
+      }
+    },
+    "requests": [
+      {
+        "id": "daily-slate",
+        "method": "GET",
+        "path": "/api/games",
+        "view": "scoreboard",
+        "fields": [
+          "id",
+          "sport",
+          "league",
+          "phase",
+          "statusDetail",
+          "startsAtMs",
+          "teams.away.abbreviation",
+          "teams.away.displayName",
+          "teams.away.score",
+          "teams.home.abbreviation",
+          "teams.home.displayName",
+          "teams.home.score"
+        ],
+        "parameters": [
+          "date={YYYY-MM-DD}",
+          "sport={sport}",
+          "limit={1..100}"
+        ]
+      },
+      {
+        "id": "activation-coverage",
+        "method": "GET",
+        "path": "/api/coverage",
+        "view": "product-coverage",
+        "fields": [
+          "sports[].sport",
+          "sports[].availability"
+        ]
+      }
+    ],
+    "relationships": [
+      "Each Game.id opens the selected game view"
+    ],
+    "unavailable": [
+      "An empty date renders an empty slate.",
+      "Missing scheduled scores stay unavailable and are never synthesized."
+    ]
+  },
+  "objects": [
+    "Game",
+    "Coverage"
+  ],
+  "instructions": [
+    "Install and render the fixture first.",
+    "Bind date and sport to useAuraMobileScoreCenter().",
+    "Use the copied same-origin Aura route so the API key stays server-side."
+  ],
+  "customization": {
+    "howTo": "To pull more or fewer fields, edit the fields= list in this component\u2019s client and the matching *-types.ts. Allowlists are published per object in GET /api/catalog (fieldCatalog); unknown or duplicate fields return 400.",
+    "fieldCatalogObjects": [
+      "game"
+    ],
+    "docs": "docs/component-data-customization.md"
+  }
+}

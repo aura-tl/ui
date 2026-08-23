@@ -1,0 +1,68 @@
+{
+  "id": "aura.player-prop-board.react-next",
+  "component": "player-prop-board",
+  "dataPlane": "aura-only",
+  "deliveryMode": "poll",
+  "dataManifest": {
+    "version": 1,
+    "component": "player-prop-board",
+    "delivery": {
+      "primary": "poll",
+      "snapshot": ["player-props"],
+      "poll": {
+        "everyMs": 120000,
+        "transport": "request-metered-rest"
+      }
+    },
+    "requests": [
+      {
+        "id": "player-props",
+        "method": "GET",
+        "path": "/api/games/{gameId}/props",
+        "view": "board",
+        "fields": [
+          "gameId",
+          "generatedAt",
+          "props[].id",
+          "props[].definition.id",
+          "props[].definition.label",
+          "props[].definition.category",
+          "props[].definition.unit",
+          "props[].player.id",
+          "props[].player.name",
+          "props[].player.teamId",
+          "props[].line",
+          "props[].outcomes[].side",
+          "props[].outcomes[].price",
+          "props[].status",
+          "props[].observedAt",
+          "props[].settlement.result",
+          "props[].settlement.outcome",
+          "props[].settlement.status",
+          "props[].settlement.settledAt"
+        ],
+        "parameters": [
+          "category={batting|pitching|...}",
+          "playerId={Aura player id}"
+        ]
+      },
+      {
+        "id": "activation-coverage",
+        "method": "GET",
+        "path": "/api/coverage",
+        "view": "product-coverage",
+        "fields": ["sports[].sport", "sports[].availability"]
+      }
+    ],
+    "relationships": ["Game.id -> PlayerProps.gameId"],
+    "unavailable": [
+      "A game without linked props renders unavailable and never fixture prices.",
+      "Unlinked player identities and unsupported prop definitions stay internal to Aura."
+    ]
+  },
+  "customization": {
+    "howTo": "To pull more or fewer fields, edit this component’s client call and the matching *-types.ts. The props object publishes its response paths in GET /api/catalog (fieldCatalog id player-props); category and playerId narrow the board server-side.",
+    "fieldCatalogObjects": ["player-props"],
+    "docs": "docs/component-data-customization.md"
+  }
+}

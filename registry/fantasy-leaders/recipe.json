@@ -1,0 +1,72 @@
+{
+  "id": "aura.fantasy-leaders.react-next",
+  "component": "fantasy-leaders",
+  "dataPlane": "aura-only",
+  "deliveryMode": "poll",
+  "dataManifest": {
+    "version": 1,
+    "component": "fantasy-leaders",
+    "delivery": {
+      "primary": "poll",
+      "snapshot": [
+        "box-score"
+      ],
+      "poll": {
+        "everyMs": 30000,
+        "transport": "request-metered-rest"
+      }
+    },
+    "requests": [
+      {
+        "id": "box-score",
+        "method": "GET",
+        "path": "/api/games/{gameId}/boxscore",
+        "view": "source-neutral-player-stats",
+        "fields": [
+          "gameId",
+          "sport",
+          "phase",
+          "teams",
+          "players[].playerId",
+          "players[].teamId",
+          "players[].displayName",
+          "players[].position",
+          "players[].stats"
+        ]
+      },
+      {
+        "id": "activation-coverage",
+        "method": "GET",
+        "path": "/api/coverage",
+        "view": "product-coverage",
+        "fields": [
+          "sports[].sport",
+          "sports[].availability"
+        ]
+      }
+    ],
+    "relationships": [
+      "BoxScore player stats \u00d7 caller scoring rules -> ranked current game points"
+    ],
+    "unavailable": [
+      "Players without retained fantasy-relevant stats are omitted.",
+      "This is current/final scoring, not a projection, roster, injury, or start/sit product."
+    ]
+  },
+  "objects": [
+    "BoxScore",
+    "Coverage"
+  ],
+  "instructions": [
+    "Render the fixture first.",
+    "Pass custom league scoring to useAuraFantasyLeaders() when needed.",
+    "One box-score request ranks the retained players; do not issue one request per player."
+  ],
+  "customization": {
+    "howTo": "To pull more or fewer fields, edit the fields= list in this component\u2019s client and the matching *-types.ts. Allowlists are published per object in GET /api/catalog (fieldCatalog); unknown or duplicate fields return 400.",
+    "fieldCatalogObjects": [
+      "boxscore"
+    ],
+    "docs": "docs/component-data-customization.md"
+  }
+}

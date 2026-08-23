@@ -1,0 +1,30 @@
+{
+  "id": "aura.prop-board.react-next",
+  "component": "prop-board",
+  "dataPlane": "aura-only",
+  "deliveryMode": "poll",
+  "dataManifest": {
+    "version": 1,
+    "component": "prop-board",
+    "delivery": { "primary": "poll", "snapshot": ["day-slate", "game-player-props"], "poll": { "everyMs": 120000, "transport": "request-metered-rest" } },
+    "requests": [
+      { "id": "day-slate", "method": "GET", "path": "/api/games", "view": "scoreboard", "fields": ["id", "sport", "league", "startsAtMs", "teams.away", "teams.home"], "parameters": ["date={YYYY-MM-DD}", "limit={1..100}"] },
+      { "id": "game-player-props", "method": "GET", "path": "/api/games/{gameId}/props", "view": "board", "fields": ["gameId", "props[].definition", "props[].player", "props[].line", "props[].outcomes", "props[].status", "props[].observedAt", "consensus"] },
+      { "id": "activation-coverage", "method": "GET", "path": "/api/coverage", "view": "product-coverage", "fields": ["sports[].sport", "sports[].availability"] }
+    ],
+    "relationships": ["Game.id -> PlayerProps.gameId"],
+    "unavailable": ["Only linked player identities and supported props render.", "The starter states a 100-game slate bound and never invents missing inventory."]
+  },
+  "objects": ["Game", "PlayerProps", "Coverage"],
+  "instructions": [
+    "Render the real retained fixture first.",
+    "Bind one memoized Aura client and a local YYYY-MM-DD date to useAuraPropBoard().",
+    "Keep polling at 30 seconds or slower; line and price changes animate when the retained model changes.",
+    "onPicksChange is selection state only. Connect your own entry or research flow."
+  ],
+  "customization": {
+    "howTo": "Edit the sport, market, search, sort, pagination, and pick behavior directly in the copied PropBoard source.",
+    "fieldCatalogObjects": ["game", "player-props"],
+    "docs": "docs/component-data-customization.md"
+  }
+}

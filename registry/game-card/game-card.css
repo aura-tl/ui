@@ -1,0 +1,187 @@
+/* Generated from @aura/ui-themes by sync-registry-styles.mjs — do not hand-edit.
+ * Regenerate: node packages/ui/cli/scripts/sync-registry-styles.mjs */
+
+/*
+ * Aura design tokens.
+ *
+ * Night + white-hot glow: a deep, cool night canvas where the accent is
+ * pure white light — buttons, active states, and live elements glow like
+ * an aura. No brand hue; light itself is the brand. Status colors are
+ * bright and cool so they pop against the dark.
+ * A clean light theme exists under data-aura-theme="light".
+ */
+
+:root {
+  /* Surfaces — cool night */
+  --aura-canvas: #08090b;
+  --aura-surface: #0e1013;
+  --aura-elevated: #15181d;
+  --aura-overlay: #1c2027;
+
+  /* Lines */
+  --aura-line: #1f232a;
+  --aura-line-strong: #2f353e;
+
+  /* Ink */
+  --aura-text: #f5f7fa;
+  --aura-muted: #9aa3ae;
+  --aura-faint: #5d6570;
+
+  /* Accent — white light */
+  --aura-accent: #ffffff;
+  --aura-accent-strong: #dfe5ec;
+  --aura-accent-ink: #0a0b0d;
+  --aura-accent-soft: rgba(255, 255, 255, 0.08);
+  --aura-accent-line: rgba(255, 255, 255, 0.35);
+
+  /* Semantic status — bright on night */
+  --aura-positive: #7fe0a8;
+  --aura-positive-soft: rgba(127, 224, 168, 0.12);
+  --aura-warning: #ffd47e;
+  --aura-warning-soft: rgba(255, 212, 126, 0.12);
+  --aura-danger: #ff8a7e;
+  --aura-danger-soft: rgba(255, 138, 126, 0.12);
+  --aura-info: #8fc2ff;
+  --aura-info-soft: rgba(143, 194, 255, 0.12);
+
+  /* Type */
+  --aura-font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --aura-font-mono: 'DM Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --aura-label: 700 10px/1 var(--aura-font-mono);
+  --aura-label-tracking: 0.12em;
+
+  /* Radius */
+  --aura-radius-sm: 6px;
+  --aura-radius-md: 10px;
+  --aura-radius-lg: 14px;
+  --aura-radius-xl: 20px;
+  --aura-radius-full: 999px;
+  --aura-radius: var(--aura-radius-lg);
+
+  /* Elevation + glow */
+  --aura-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --aura-shadow-2: 0 12px 32px rgba(0, 0, 0, 0.44);
+  --aura-shadow-3: 0 28px 80px rgba(0, 0, 0, 0.55);
+  --aura-glow-accent: 0 0 22px rgba(255, 255, 255, 0.38);
+  --aura-glow-soft: 0 0 44px rgba(255, 255, 255, 0.1);
+
+  /* Halo washes for heroes and stages */
+  --aura-halo-gold: rgba(255, 255, 255, 0.055);
+  --aura-halo-sky: rgba(143, 194, 255, 0.05);
+
+  /* Focus */
+  --aura-focus: 0 0 0 2px var(--aura-canvas), 0 0 0 4px var(--aura-accent-line);
+
+  /* Motion */
+  --aura-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --aura-speed: 160ms;
+}
+
+[data-aura-theme='light'] {
+  --aura-canvas: #f6f7f9;
+  --aura-surface: #ffffff;
+  --aura-elevated: #eef0f3;
+  --aura-overlay: #ffffff;
+
+  --aura-line: #e3e6ea;
+  --aura-line-strong: #cdd2d9;
+
+  --aura-text: #16181c;
+  --aura-muted: #646b74;
+  --aura-faint: #9aa1aa;
+
+  --aura-accent: #16181c;
+  --aura-accent-strong: #000000;
+  --aura-accent-ink: #ffffff;
+  --aura-accent-soft: rgba(22, 24, 28, 0.07);
+  --aura-accent-line: rgba(22, 24, 28, 0.3);
+
+  --aura-positive: #178a52;
+  --aura-positive-soft: rgba(23, 138, 82, 0.1);
+  --aura-warning: #a3690e;
+  --aura-warning-soft: rgba(163, 105, 14, 0.11);
+  --aura-danger: #c23d33;
+  --aura-danger-soft: rgba(194, 61, 51, 0.1);
+  --aura-info: #2669b8;
+  --aura-info-soft: rgba(38, 105, 184, 0.1);
+
+  --aura-shadow-1: 0 1px 2px rgba(20, 24, 30, 0.07);
+  --aura-shadow-2: 0 12px 32px rgba(20, 24, 30, 0.09);
+  --aura-shadow-3: 0 28px 80px rgba(20, 24, 30, 0.14);
+  --aura-glow-accent: 0 0 20px rgba(22, 24, 28, 0.25);
+  --aura-glow-soft: 0 0 40px rgba(22, 24, 28, 0.08);
+
+  --aura-halo-gold: rgba(22, 24, 28, 0.04);
+  --aura-halo-sky: rgba(38, 105, 184, 0.05);
+
+  --aura-focus: 0 0 0 2px var(--aura-canvas), 0 0 0 4px var(--aura-accent-line);
+}
+
+/* REST essentials: quiet, copyable primitives with sport-native hierarchy.
+   These are paper-light surfaces by design, so they pin light token values
+   locally and render correctly on any page background. */
+.aura-game-card,
+.aura-play-thread,
+.aura-box-ledger,
+.aura-player-passport {
+  --aura-text: #16181c;
+  --aura-muted: #646b74;
+  --aura-faint: #9aa1aa;
+  --aura-line: #e3e6ea;
+  --aura-surface: #ffffff; --aura-line-strong: #cdd2d9; --aura-accent: #3d6fb0; --aura-accent-strong: #2d5a94; --aura-accent-ink: #ffffff; --aura-accent-soft: rgba(61, 111, 176, 0.1); --aura-accent-line: rgba(61, 111, 176, 0.38);
+  --aura-elevated: #f2f4f6;
+  box-sizing: border-box;
+  color: var(--aura-text, #16181c);
+  border: 1px solid var(--aura-line, #e3e6ea);
+  background: var(--aura-surface, #ffffff);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+.aura-game-card *, .aura-play-thread *, .aura-box-ledger *, .aura-player-passport * { box-sizing: border-box; }
+.aura-game-card {
+  width: min(100%, 680px);
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: 0 22px 55px rgba(48, 43, 33, .09);
+}
+.aura-game-card > header,
+.aura-game-card > footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 18px;
+  color: var(--aura-muted, #646b74);
+  font-size: 11px;
+}
+.aura-game-card > header { border-bottom: 1px solid var(--aura-line, #e3e6ea); }
+.aura-game-card > header strong { color: var(--aura-text, #16181c); font-size: 11px; }
+.aura-game-card > header strong[data-phase='in_progress']::before {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: #d3483e;
+  content: '';
+}
+.aura-game-card__matchup { display: grid; grid-template-columns: 1fr 34px 1fr; align-items: stretch; padding: 22px 18px; }
+.aura-game-card__team { display: grid; grid-template-columns: 38px minmax(0, 1fr) auto; align-items: center; gap: 11px; min-width: 0; }
+.aura-game-card__team i {
+  display: grid; place-items: center; width: 38px; height: 38px; color: #fff; border-radius: 11px;
+  font-style: normal; font-size: 12px; font-weight: 800; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+}
+.aura-game-card__team div { display: grid; min-width: 0; gap: 2px; }
+.aura-game-card__team div strong { font-size: 12px; letter-spacing: .02em; }
+.aura-game-card__team div span { overflow: hidden; color: var(--aura-muted, #646b74); font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+.aura-game-card__team > b { font: 650 34px/.9 ui-monospace, SFMono-Regular, monospace; letter-spacing: -.08em; }
+.aura-game-card__team > small { grid-column: 2; color: var(--aura-muted, #646b74); font-size: 9px; }
+.aura-game-card__divider { position: relative; display: grid; place-items: center; color: var(--aura-muted, #646b74); font-size: 9px; }
+.aura-game-card__divider::before { position: absolute; inset: 0 50%; width: 1px; background: var(--aura-line, #e3e6ea); content: ''; }
+.aura-game-card__divider span { z-index: 1; padding: 6px 0; background: var(--aura-surface, #ffffff); }
+.aura-game-card > footer { border-top: 1px dashed var(--aura-line, #e3e6ea); }
+.aura-game-card > footer span { color: var(--aura-text, #16181c); }
+@media (max-width: 580px) {
+  .aura-game-card__matchup { grid-template-columns: 1fr; gap: 14px; }
+  .aura-game-card__divider { display: none; }
+}
+

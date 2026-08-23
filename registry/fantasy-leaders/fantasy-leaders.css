@@ -1,0 +1,157 @@
+/* Generated from @aura/ui-themes by sync-registry-styles.mjs — do not hand-edit.
+ * Regenerate: node packages/ui/cli/scripts/sync-registry-styles.mjs */
+
+/*
+ * Aura design tokens.
+ *
+ * Night + white-hot glow: a deep, cool night canvas where the accent is
+ * pure white light — buttons, active states, and live elements glow like
+ * an aura. No brand hue; light itself is the brand. Status colors are
+ * bright and cool so they pop against the dark.
+ * A clean light theme exists under data-aura-theme="light".
+ */
+
+:root {
+  /* Surfaces — cool night */
+  --aura-canvas: #08090b;
+  --aura-surface: #0e1013;
+  --aura-elevated: #15181d;
+  --aura-overlay: #1c2027;
+
+  /* Lines */
+  --aura-line: #1f232a;
+  --aura-line-strong: #2f353e;
+
+  /* Ink */
+  --aura-text: #f5f7fa;
+  --aura-muted: #9aa3ae;
+  --aura-faint: #5d6570;
+
+  /* Accent — white light */
+  --aura-accent: #ffffff;
+  --aura-accent-strong: #dfe5ec;
+  --aura-accent-ink: #0a0b0d;
+  --aura-accent-soft: rgba(255, 255, 255, 0.08);
+  --aura-accent-line: rgba(255, 255, 255, 0.35);
+
+  /* Semantic status — bright on night */
+  --aura-positive: #7fe0a8;
+  --aura-positive-soft: rgba(127, 224, 168, 0.12);
+  --aura-warning: #ffd47e;
+  --aura-warning-soft: rgba(255, 212, 126, 0.12);
+  --aura-danger: #ff8a7e;
+  --aura-danger-soft: rgba(255, 138, 126, 0.12);
+  --aura-info: #8fc2ff;
+  --aura-info-soft: rgba(143, 194, 255, 0.12);
+
+  /* Type */
+  --aura-font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --aura-font-mono: 'DM Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --aura-label: 700 10px/1 var(--aura-font-mono);
+  --aura-label-tracking: 0.12em;
+
+  /* Radius */
+  --aura-radius-sm: 6px;
+  --aura-radius-md: 10px;
+  --aura-radius-lg: 14px;
+  --aura-radius-xl: 20px;
+  --aura-radius-full: 999px;
+  --aura-radius: var(--aura-radius-lg);
+
+  /* Elevation + glow */
+  --aura-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --aura-shadow-2: 0 12px 32px rgba(0, 0, 0, 0.44);
+  --aura-shadow-3: 0 28px 80px rgba(0, 0, 0, 0.55);
+  --aura-glow-accent: 0 0 22px rgba(255, 255, 255, 0.38);
+  --aura-glow-soft: 0 0 44px rgba(255, 255, 255, 0.1);
+
+  /* Halo washes for heroes and stages */
+  --aura-halo-gold: rgba(255, 255, 255, 0.055);
+  --aura-halo-sky: rgba(143, 194, 255, 0.05);
+
+  /* Focus */
+  --aura-focus: 0 0 0 2px var(--aura-canvas), 0 0 0 4px var(--aura-accent-line);
+
+  /* Motion */
+  --aura-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --aura-speed: 160ms;
+}
+
+[data-aura-theme='light'] {
+  --aura-canvas: #f6f7f9;
+  --aura-surface: #ffffff;
+  --aura-elevated: #eef0f3;
+  --aura-overlay: #ffffff;
+
+  --aura-line: #e3e6ea;
+  --aura-line-strong: #cdd2d9;
+
+  --aura-text: #16181c;
+  --aura-muted: #646b74;
+  --aura-faint: #9aa1aa;
+
+  --aura-accent: #16181c;
+  --aura-accent-strong: #000000;
+  --aura-accent-ink: #ffffff;
+  --aura-accent-soft: rgba(22, 24, 28, 0.07);
+  --aura-accent-line: rgba(22, 24, 28, 0.3);
+
+  --aura-positive: #178a52;
+  --aura-positive-soft: rgba(23, 138, 82, 0.1);
+  --aura-warning: #a3690e;
+  --aura-warning-soft: rgba(163, 105, 14, 0.11);
+  --aura-danger: #c23d33;
+  --aura-danger-soft: rgba(194, 61, 51, 0.1);
+  --aura-info: #2669b8;
+  --aura-info-soft: rgba(38, 105, 184, 0.1);
+
+  --aura-shadow-1: 0 1px 2px rgba(20, 24, 30, 0.07);
+  --aura-shadow-2: 0 12px 32px rgba(20, 24, 30, 0.09);
+  --aura-shadow-3: 0 28px 80px rgba(20, 24, 30, 0.14);
+  --aura-glow-accent: 0 0 20px rgba(22, 24, 28, 0.25);
+  --aura-glow-soft: 0 0 40px rgba(22, 24, 28, 0.08);
+
+  --aura-halo-gold: rgba(22, 24, 28, 0.04);
+  --aura-halo-sky: rgba(38, 105, 184, 0.05);
+
+  --aura-focus: 0 0 0 2px var(--aura-canvas), 0 0 0 4px var(--aura-accent-line);
+}
+
+/* Application-ready compositions built from the same bounded Aura contracts. */
+.aura-mobile-scores,
+.aura-game-markets,
+.aura-fantasy-leaders {
+  --aura-text: #16181c;
+  --aura-muted: #646b74;
+  --aura-line: #e3e6ea;
+  --aura-surface: #ffffff; --aura-line-strong: #cdd2d9; --aura-accent: #3d6fb0; --aura-accent-strong: #2d5a94; --aura-accent-ink: #ffffff; --aura-accent-soft: rgba(61, 111, 176, 0.1); --aura-accent-line: rgba(61, 111, 176, 0.38);
+  box-sizing: border-box;
+  width: min(100%, 390px);
+  overflow: hidden;
+  color: var(--aura-text, #16181c);
+  border: 1px solid var(--aura-line, #e3e6ea);
+  border-radius: 28px;
+  background: var(--aura-surface, #ffffff);
+  box-shadow: 0 22px 60px rgba(55, 48, 37, .09);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+.aura-mobile-scores *, .aura-game-markets *, .aura-fantasy-leaders * { box-sizing: border-box; }
+.aura-mobile-scores > header,
+.aura-fantasy-leaders > header { display: flex; align-items: end; justify-content: space-between; gap: 18px; padding: 25px 22px 18px; }
+.aura-mobile-scores > header small,
+.aura-fantasy-leaders > header small { color: var(--aura-muted, #646b74); font: 650 9px/1 ui-monospace, monospace; letter-spacing: .09em; text-transform: uppercase; }
+.aura-mobile-scores > header h2,
+.aura-fantasy-leaders > header h2 { margin: 5px 0 0; font-size: 30px; line-height: 1; letter-spacing: -.055em; }
+.aura-mobile-scores > header span,
+.aura-fantasy-leaders > header span { padding: 6px 9px; color: #c23d33; border-radius: 999px; background: #fae9e6; font-size: 9px; font-weight: 700; }
+.aura-fantasy-leaders__matchup { padding: 10px 22px; color: var(--aura-muted, #646b74); border-block: 1px solid var(--aura-line, #e3e6ea); background: #eef0f3; font-size: 10px; font-weight: 700; }
+.aura-fantasy-leaders ol { margin: 0; padding: 0; list-style: none; }
+.aura-fantasy-leaders li { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto 48px; align-items: center; gap: 10px; min-height: 70px; padding: 10px 18px; border-bottom: 1px solid color-mix(in srgb, var(--aura-line, #e3e6ea) 68%, transparent); }
+.aura-fantasy-leaders li:last-child { border-bottom: 0; }
+.aura-fantasy-leaders li > b { color: #aaa39a; font: 650 10px/1 ui-monospace, monospace; }
+.aura-fantasy-leaders li > span { display: grid; gap: 4px; }
+.aura-fantasy-leaders li > span strong { overflow: hidden; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.aura-fantasy-leaders li > span small { color: var(--aura-muted, #646b74); font-size: 8px; }
+.aura-fantasy-leaders li > em { max-width: 108px; overflow: hidden; color: var(--aura-muted, #646b74); font-size: 8px; font-style: normal; text-overflow: ellipsis; white-space: nowrap; }
+.aura-fantasy-leaders li > i { font: 750 16px/1 ui-monospace, monospace; font-style: normal; text-align: right; }
+

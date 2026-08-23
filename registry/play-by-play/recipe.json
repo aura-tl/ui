@@ -1,0 +1,97 @@
+{
+  "id": "aura.play-by-play.react-next",
+  "component": "play-by-play",
+  "dataPlane": "aura-only",
+  "deliveryMode": "poll",
+  "dataManifest": {
+    "version": 1,
+    "component": "play-by-play",
+    "delivery": {
+      "primary": "poll",
+      "snapshot": [
+        "game-card",
+        "plays-page"
+      ],
+      "poll": {
+        "everyMs": 15000,
+        "transport": "request-metered-rest"
+      }
+    },
+    "requests": [
+      {
+        "id": "game-card",
+        "method": "GET",
+        "path": "/api/games/{gameId}",
+        "view": "card",
+        "fields": [
+          "id",
+          "league",
+          "phase",
+          "teams.away.abbreviation",
+          "teams.home.abbreviation"
+        ]
+      },
+      {
+        "id": "plays-page",
+        "method": "GET",
+        "path": "/api/games/{gameId}/plays/page",
+        "view": "bounded-page",
+        "fields": [
+          "gameId",
+          "items[].id",
+          "items[].gameId",
+          "items[].text",
+          "items[].scoringPlay",
+          "items[].participants",
+          "items[].sequence",
+          "items[].clock",
+          "items[].period",
+          "items[].inning",
+          "items[].awayScore",
+          "items[].homeScore",
+          "items[].situation"
+        ],
+        "parameters": [
+          "pageSize={1..250}",
+          "cursor={opaqueCursor}",
+          "fields=items.sequence,items.text,items.scoringPlay,items.clock,items.period,items.inning,items.awayScore,items.homeScore,items.situation"
+        ]
+      },
+      {
+        "id": "activation-coverage",
+        "method": "GET",
+        "path": "/api/coverage",
+        "view": "product-coverage",
+        "fields": [
+          "sports[].sport",
+          "sports[].availability"
+        ]
+      }
+    ],
+    "relationships": [
+      "Game.id -> GamePlay.gameId"
+    ],
+    "unavailable": [
+      "An empty play archive renders no plays yet; it never fabricates a sequence.",
+      "Sport-native situation fields are omitted when absent."
+    ]
+  },
+  "objects": [
+    "Game",
+    "GamePlay",
+    "Coverage"
+  ],
+  "instructions": [
+    "Render auraPlayByPlayFixture first.",
+    "Pass one client and game id to useAuraPlayByPlay().",
+    "Pagination is explicit; the starter renders one bounded recent page."
+  ],
+  "customization": {
+    "howTo": "To pull more or fewer fields, edit the fields= list in this component\u2019s client and the matching *-types.ts. Allowlists are published per object in GET /api/catalog (fieldCatalog); unknown or duplicate fields return 400.",
+    "fieldCatalogObjects": [
+      "game-detail",
+      "game-play"
+    ],
+    "docs": "docs/component-data-customization.md"
+  }
+}

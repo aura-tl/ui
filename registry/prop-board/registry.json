@@ -1,0 +1,31 @@
+{
+  "id": "prop-board",
+  "displayName": "Aura PropBoard Starter",
+  "framework": "react-next-app-router",
+  "deliveryMode": "poll",
+  "dataPlane": "aura-only",
+  "dataManifest": {
+    "version": 1,
+    "component": "prop-board",
+    "delivery": { "primary": "poll", "snapshot": ["day-slate", "game-player-props"], "poll": { "everyMs": 120000, "transport": "request-metered-rest" } },
+    "requests": [
+      { "id": "day-slate", "method": "GET", "path": "/api/games", "view": "scoreboard", "fields": ["id", "sport", "league", "startsAtMs", "teams.away", "teams.home"], "parameters": ["date={YYYY-MM-DD}", "limit={1..100}"] },
+      { "id": "game-player-props", "method": "GET", "path": "/api/games/{gameId}/props", "view": "board", "fields": ["gameId", "props[].definition", "props[].player", "props[].line", "props[].outcomes", "props[].status", "props[].observedAt", "consensus" ] },
+      { "id": "activation-coverage", "method": "GET", "path": "/api/coverage", "view": "product-coverage", "fields": ["sports[].sport", "sports[].availability"] }
+    ],
+    "relationships": ["Game.id -> PlayerProps.gameId"],
+    "unavailable": ["Only linked player identities and supported props render.", "The starter states a 100-game slate bound and never invents missing inventory."]
+  },
+  "objects": ["Game", "PlayerProps", "Coverage"],
+  "requires": ["react", "next"],
+  "registryDependencies": ["player-prop-board"],
+  "files": [
+    { "source": "prop-board-types.ts", "destination": "lib/aura/prop-board-types.ts" },
+    { "source": "use-prop-board.ts", "destination": "hooks/aura/use-prop-board.ts" },
+    { "source": "prop-board.tsx", "destination": "components/aura/prop-board.tsx" },
+    { "source": "prop-board.css", "destination": "styles/aura-prop-board-app.css" },
+    { "source": "fixture.ts", "destination": "fixtures/aura/prop-board.ts" },
+    { "source": "recipe.json", "destination": "aura/recipes/prop-board.json" }
+  ],
+  "nextSteps": ["1. Import styles/aura-prop-board-app.css once.", "2. Render fixtures/aura/prop-board.ts immediately.", "3. Bind one memoized Aura client, a YYYY-MM-DD date, and useAuraPropBoard()."]
+}

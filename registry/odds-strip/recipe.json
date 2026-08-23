@@ -1,0 +1,88 @@
+{
+  "id": "aura.odds-strip.react-next",
+  "component": "odds-strip",
+  "dataPlane": "aura-only",
+  "deliveryMode": "poll",
+  "dataManifest": {
+    "version": 1,
+    "component": "odds-strip",
+    "delivery": {
+      "primary": "poll",
+      "snapshot": [
+        "game-card",
+        "odds-timeline"
+      ],
+      "poll": {
+        "everyMs": 60000,
+        "transport": "request-metered-rest"
+      }
+    },
+    "requests": [
+      {
+        "id": "game-card",
+        "method": "GET",
+        "path": "/api/games/{gameId}",
+        "view": "card",
+        "fields": [
+          "id",
+          "teams.away.abbreviation",
+          "teams.home.abbreviation"
+        ]
+      },
+      {
+        "id": "odds-timeline",
+        "method": "GET",
+        "path": "/api/games/{gameId}/odds/timeline",
+        "view": "chart-ready-market",
+        "fields": [
+          "gameId",
+          "marketType",
+          "points[].observedAt",
+          "points[].outcomes[].side",
+          "points[].outcomes[].line",
+          "points[].outcomes[].price"
+        ],
+        "parameters": [
+          "marketType={moneyline|spread|total}",
+          "limit={1..500}",
+          "fields={points.observedAt,points.outcomes.side,points.outcomes.line,points.outcomes.price}"
+        ]
+      },
+      {
+        "id": "activation-coverage",
+        "method": "GET",
+        "path": "/api/coverage",
+        "view": "product-coverage",
+        "fields": [
+          "sports[].sport",
+          "sports[].availability"
+        ]
+      }
+    ],
+    "relationships": [
+      "Game.id -> OddsTimeline.gameId"
+    ],
+    "unavailable": [
+      "A game without retained odds renders unavailable and never fixture prices.",
+      "A missing side or price is omitted or rendered as an em dash."
+    ]
+  },
+  "objects": [
+    "Game",
+    "OddsTimeline",
+    "Coverage"
+  ],
+  "instructions": [
+    "Render auraOddsStripFixture first.",
+    "Pass a game id and one marketType to useAuraOddsStrip().",
+    "This component renders one selected market; it does not fan out across a slate."
+  ],
+  "customization": {
+    "howTo": "To pull more or fewer fields, edit the fields= list in this component\u2019s client and the matching *-types.ts. Allowlists are published per object in GET /api/catalog (fieldCatalog); unknown or duplicate fields return 400.",
+    "fieldCatalogObjects": [
+      "game-detail",
+      "odds-timeline"
+    ],
+    "docs": "docs/component-data-customization.md"
+  }
+}

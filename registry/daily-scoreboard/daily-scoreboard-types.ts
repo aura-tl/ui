@@ -1,0 +1,8 @@
+import type { AuraGameScoreboard } from '@/lib/aura/live-scoreboard-types';
+export interface AuraScoreRowTeam { id:string; abbreviation:string; name:string; score:number|null; color:string; }
+export interface AuraScoreRowModel { id:string; league:string; phase:string; status:string; startsAt:number|null; away:AuraScoreRowTeam; home:AuraScoreRowTeam; }
+export interface AuraDailyScoreboardModel { date:string; sport:string; games:AuraScoreRowModel[]; }
+export interface AuraDailyScoreboardState { status:'loading'|'ready'|'empty'|'error'; model:AuraDailyScoreboardModel|null; error:string|null; }
+export function toAuraDailyScoreboardModel(date:string,sport:string,games:AuraGameScoreboard[]):AuraDailyScoreboardModel{return{date,sport,games:games.map(game=>{const teams=object(game.teams);return{id:String(game.gameId||''),league:String(game.league||game.sport||sport),phase:String(game.phase||'scheduled'),status:String(game.statusDetail||game.statusText||game.phase||'Scheduled'),startsAt:number(game.startsAtMs),away:team(object(teams.away),'away'),home:team(object(teams.home),'home')}})}}
+function team(value:Record<string,unknown>,side:string):AuraScoreRowTeam{return{id:String(value.id||side),abbreviation:String(value.abbreviation||side.slice(0,3).toUpperCase()),name:String(value.displayName||value.shortName||value.name||side),score:number(value.score),color:String(value.color||'#aaa49a')}}
+function object(value:unknown):Record<string,unknown>{return value&&typeof value==='object'&&!Array.isArray(value)?value as Record<string,unknown>:{};}function number(value:unknown):number|null{const parsed=typeof value==='number'?value:Number(value);return Number.isFinite(parsed)?parsed:null;}

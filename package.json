@@ -1,0 +1,26 @@
+{
+  "name": "aura-tl",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "aura-ui": "./bin/aura-ui.mjs"
+  },
+  "files": [
+    "bin",
+    "registry",
+    "templates"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "validate": "node --test test/*.test.mjs && tsc -p tsconfig.registry.json && node scripts/sync-registry-styles.mjs --check",
+    "proof:clean-consumer": "node scripts/clean-consumer-proof.mjs",
+    "proof:clean-gamecast-consumer": "node scripts/clean-gamecast-consumer-proof.mjs",
+    "proof:clean-pulse-consumer": "node scripts/clean-pulse-consumer-proof.mjs",
+    "sync:styles": "node scripts/sync-registry-styles.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

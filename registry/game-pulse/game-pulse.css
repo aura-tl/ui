@@ -1,0 +1,1393 @@
+/* Generated from @aura/ui-themes by sync-registry-styles.mjs — do not hand-edit.
+ * Regenerate: node packages/ui/cli/scripts/sync-registry-styles.mjs */
+
+/*
+ * Aura design tokens.
+ *
+ * Night + white-hot glow: a deep, cool night canvas where the accent is
+ * pure white light — buttons, active states, and live elements glow like
+ * an aura. No brand hue; light itself is the brand. Status colors are
+ * bright and cool so they pop against the dark.
+ * A clean light theme exists under data-aura-theme="light".
+ */
+
+:root {
+  /* Surfaces — cool night */
+  --aura-canvas: #08090b;
+  --aura-surface: #0e1013;
+  --aura-elevated: #15181d;
+  --aura-overlay: #1c2027;
+
+  /* Lines */
+  --aura-line: #1f232a;
+  --aura-line-strong: #2f353e;
+
+  /* Ink */
+  --aura-text: #f5f7fa;
+  --aura-muted: #9aa3ae;
+  --aura-faint: #5d6570;
+
+  /* Accent — white light */
+  --aura-accent: #ffffff;
+  --aura-accent-strong: #dfe5ec;
+  --aura-accent-ink: #0a0b0d;
+  --aura-accent-soft: rgba(255, 255, 255, 0.08);
+  --aura-accent-line: rgba(255, 255, 255, 0.35);
+
+  /* Semantic status — bright on night */
+  --aura-positive: #7fe0a8;
+  --aura-positive-soft: rgba(127, 224, 168, 0.12);
+  --aura-warning: #ffd47e;
+  --aura-warning-soft: rgba(255, 212, 126, 0.12);
+  --aura-danger: #ff8a7e;
+  --aura-danger-soft: rgba(255, 138, 126, 0.12);
+  --aura-info: #8fc2ff;
+  --aura-info-soft: rgba(143, 194, 255, 0.12);
+
+  /* Type */
+  --aura-font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --aura-font-mono: 'DM Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --aura-label: 700 10px/1 var(--aura-font-mono);
+  --aura-label-tracking: 0.12em;
+
+  /* Radius */
+  --aura-radius-sm: 6px;
+  --aura-radius-md: 10px;
+  --aura-radius-lg: 14px;
+  --aura-radius-xl: 20px;
+  --aura-radius-full: 999px;
+  --aura-radius: var(--aura-radius-lg);
+
+  /* Elevation + glow */
+  --aura-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --aura-shadow-2: 0 12px 32px rgba(0, 0, 0, 0.44);
+  --aura-shadow-3: 0 28px 80px rgba(0, 0, 0, 0.55);
+  --aura-glow-accent: 0 0 22px rgba(255, 255, 255, 0.38);
+  --aura-glow-soft: 0 0 44px rgba(255, 255, 255, 0.1);
+
+  /* Halo washes for heroes and stages */
+  --aura-halo-gold: rgba(255, 255, 255, 0.055);
+  --aura-halo-sky: rgba(143, 194, 255, 0.05);
+
+  /* Focus */
+  --aura-focus: 0 0 0 2px var(--aura-canvas), 0 0 0 4px var(--aura-accent-line);
+
+  /* Motion */
+  --aura-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --aura-speed: 160ms;
+}
+
+[data-aura-theme='light'] {
+  --aura-canvas: #f6f7f9;
+  --aura-surface: #ffffff;
+  --aura-elevated: #eef0f3;
+  --aura-overlay: #ffffff;
+
+  --aura-line: #e3e6ea;
+  --aura-line-strong: #cdd2d9;
+
+  --aura-text: #16181c;
+  --aura-muted: #646b74;
+  --aura-faint: #9aa1aa;
+
+  --aura-accent: #16181c;
+  --aura-accent-strong: #000000;
+  --aura-accent-ink: #ffffff;
+  --aura-accent-soft: rgba(22, 24, 28, 0.07);
+  --aura-accent-line: rgba(22, 24, 28, 0.3);
+
+  --aura-positive: #178a52;
+  --aura-positive-soft: rgba(23, 138, 82, 0.1);
+  --aura-warning: #a3690e;
+  --aura-warning-soft: rgba(163, 105, 14, 0.11);
+  --aura-danger: #c23d33;
+  --aura-danger-soft: rgba(194, 61, 51, 0.1);
+  --aura-info: #2669b8;
+  --aura-info-soft: rgba(38, 105, 184, 0.1);
+
+  --aura-shadow-1: 0 1px 2px rgba(20, 24, 30, 0.07);
+  --aura-shadow-2: 0 12px 32px rgba(20, 24, 30, 0.09);
+  --aura-shadow-3: 0 28px 80px rgba(20, 24, 30, 0.14);
+  --aura-glow-accent: 0 0 20px rgba(22, 24, 28, 0.25);
+  --aura-glow-soft: 0 0 40px rgba(22, 24, 28, 0.08);
+
+  --aura-halo-gold: rgba(22, 24, 28, 0.04);
+  --aura-halo-sky: rgba(38, 105, 184, 0.05);
+
+  --aura-focus: 0 0 0 2px var(--aura-canvas), 0 0 0 4px var(--aura-accent-line);
+}
+
+.aura-pulse-header,
+.aura-pulse-inspector > header,
+.aura-pulse-turning > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+.aura-pulse-header { margin-bottom: 22px; }
+.aura-pulse-header h2 {
+  margin: 6px 0 0;
+  font-size: clamp(26px, 4vw, 46px);
+  letter-spacing: -.05em;
+}
+.aura-pulse-header h2 b { color: var(--aura-accent); }
+.aura-pulse-header h2 i { color: var(--aura-muted); font: 500 .42em/1 monospace; letter-spacing: 0; }
+.aura-pulse-status { display: grid; justify-items: end; gap: 8px; text-align: right; }
+.aura-pulse-status > strong { font: 800 18px/1 monospace; }
+.aura-pulse-mode {
+  color: var(--aura-accent);
+  font: 800 10px/1 monospace;
+  letter-spacing: .13em;
+}
+.aura-pulse-mode i {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 12px currentColor;
+}
+.aura-pulse-mode.is-replay { color: #6fd7ff; }
+.aura-pulse-mode.is-fixture { color: #c4a7ff; }
+.aura-pulse-lanes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--aura-line);
+  border-left: 1px solid var(--aura-line);
+}
+.aura-pulse-lane {
+  min-width: 0;
+  padding: 15px;
+  border-right: 1px solid var(--aura-line);
+  border-bottom: 1px solid var(--aura-line);
+  background: rgba(0, 0, 0, .12);
+}
+.aura-pulse-lane.is-probability { grid-column: 1 / -1; }
+.aura-pulse-lane > header { display: flex; align-items: end; justify-content: space-between; gap: 12px; }
+.aura-pulse-lane > header div { min-width: 0; display: grid; gap: 3px; }
+.aura-pulse-lane > header span,
+.aura-pulse-lane > small {
+  overflow: hidden;
+  color: var(--aura-muted);
+  font: 700 9px/1.25 monospace;
+  letter-spacing: .1em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.aura-pulse-lane > header strong { overflow: hidden; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+.aura-pulse-lane > header b { flex: none; font: 800 18px/1 monospace; }
+.aura-pulse-lane > header b em,
+.aura-pulse-inspector section strong em {
+  display: block;
+  margin-top: 4px;
+  color: var(--aura-muted);
+  font: 700 9px/1 monospace;
+  font-style: normal;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.aura-pulse-chart { height: 66px; margin: 9px 0 5px; }
+.aura-pulse-lane.is-complementary-probability .aura-pulse-chart { height: 104px; }
+.aura-pulse-chart svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.aura-pulse-chart path { filter: drop-shadow(0 0 5px color-mix(in srgb, var(--aura-accent) 15%, transparent)); }
+.aura-pulse-chart circle { vector-effect: non-scaling-stroke; }
+.aura-pulse-chart text {
+  fill: var(--aura-text);
+  font: 800 11px/1 monospace;
+  letter-spacing: .08em;
+  vector-effect: non-scaling-stroke;
+}
+.aura-pulse-area { pointer-events: none; }
+.aura-pulse-baseline {
+  stroke: rgba(255, 255, 255, .28);
+  stroke-width: 1;
+  stroke-dasharray: 7 5;
+  vector-effect: non-scaling-stroke;
+}
+.aura-pulse-cursor { stroke: rgba(255, 255, 255, .56); stroke-width: 1; stroke-dasharray: 3 4; vector-effect: non-scaling-stroke; }
+.aura-pulse-unavailable {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: var(--aura-muted);
+  border: 1px dashed var(--aura-line);
+  font: 700 10px/1 monospace;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.aura-pulse-unavailable span { width: 18px; height: 1px; background: currentColor; }
+.aura-pulse-transport { padding: 18px 0 20px; }
+.aura-pulse-time { display: flex; justify-content: space-between; margin-bottom: 9px; color: var(--aura-muted); font: 700 9px/1 monospace; letter-spacing: .08em; }
+.aura-pulse-time strong { color: var(--aura-text); }
+.aura-pulse-transport input {
+  width: 100%;
+  height: 5px;
+  margin: 0;
+  appearance: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, var(--aura-accent) var(--aura-pulse-progress), var(--aura-line) var(--aura-pulse-progress));
+}
+.aura-pulse-transport input::-webkit-slider-thumb {
+  width: 17px;
+  height: 17px;
+  appearance: none;
+  border: 4px solid var(--aura-surface);
+  border-radius: 50%;
+  background: var(--aura-accent);
+  box-shadow: 0 0 0 1px var(--aura-accent), 0 0 18px color-mix(in srgb, var(--aura-accent) 35%, transparent);
+}
+.aura-pulse-inspector-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.aura-pulse-inspector,
+.aura-pulse-turning {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid var(--aura-line);
+  border-radius: 10px;
+  background: var(--aura-elevated);
+}
+.aura-pulse-inspector > header,
+.aura-pulse-turning > header {
+  color: var(--aura-muted);
+  font: 800 9px/1 monospace;
+  letter-spacing: .1em;
+}
+.aura-pulse-inspector > header strong,
+.aura-pulse-turning > header strong { color: var(--aura-text); }
+.aura-pulse-inspector > div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 12px;
+  background: var(--aura-line);
+}
+.aura-pulse-inspector section {
+  display: grid;
+  min-width: 0;
+  gap: 5px;
+  padding: 10px;
+  background: var(--aura-surface);
+}
+.aura-pulse-inspector section span { overflow: hidden; color: var(--aura-muted); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.aura-pulse-inspector section strong { overflow: hidden; font: 800 14px/1.2 monospace; text-overflow: ellipsis; white-space: nowrap; }
+.aura-pulse-turning > div { display: grid; gap: 5px; max-height: 185px; margin-top: 12px; overflow: auto; }
+.aura-pulse-turning button {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 10px;
+  padding: 8px 9px;
+  text-align: left;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: var(--aura-surface);
+  cursor: pointer;
+}
+.aura-pulse-turning button:hover,
+.aura-pulse-turning button.is-active { border-color: var(--aura-accent); }
+.aura-pulse-turning time { color: var(--aura-accent); font: 800 10px/1.3 monospace; }
+.aura-pulse-turning button span { overflow: hidden; color: var(--aura-muted); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.aura-pulse-turning p { color: var(--aura-muted); font-size: 12px; }
+@media (max-width: 720px) {
+  .aura-pulse-header { align-items: flex-start; }
+  .aura-pulse-header h2 { font-size: 28px; }
+  .aura-pulse-lanes,
+  .aura-pulse-inspector-grid { grid-template-columns: 1fr; }
+  .aura-pulse-lane:nth-child(n + 5) { display: block; }
+}
+@media (max-width: 440px) {
+  .aura-pulse-header { display: grid; }
+  .aura-pulse-status { justify-items: start; text-align: left; }
+  .aura-pulse-inspector > div { grid-template-columns: 1fr; }
+}
+/* ==========================================================================
+   Aura Pulse
+   A broadcast-grade game-flow surface. Sport-agnostic shell + chart, with
+   presentation adapters for baseball and basketball. Everything here is
+   namespaced under .aura-pulse so it can be lifted into any Aura product.
+   ========================================================================== */
+
+.aura-pulse {
+  /* Pulse is a broadcast embed: it pins the dark palette so it reads as a
+     deliberate dark surface inside the light Aura site. White-glow accent. */
+  --pulse-canvas: #0b0c0e;
+  --pulse-surface: #111318;
+  --pulse-raised: #181b20;
+  --pulse-sunken: #08090b;
+  --pulse-line: #22262d;
+  --pulse-line-strong: #333944;
+  --pulse-ink: #f5f7fa;
+  --pulse-dim: #9aa3ae;
+  --pulse-faint: #5d6570;
+  --pulse-accent: #ffffff;
+  --pulse-warn: #ffd47e;
+  --pulse-live: #ff6a5e;
+  --pulse-radius: 18px;
+  --pulse-mono: var(--aura-font-mono, ui-monospace, Menlo, Consolas, monospace);
+
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  color: var(--pulse-ink);
+  border: 1px solid var(--pulse-line);
+  border-radius: var(--pulse-radius);
+  background:
+    radial-gradient(140% 90% at 50% -30%, rgba(255, 255, 255, .06), transparent 62%),
+    var(--pulse-surface);
+  font-feature-settings: "tnum" 1, "ss01" 1;
+  box-shadow: 0 34px 90px rgba(0, 0, 0, .45);
+}
+.aura-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.aura-pulse :focus-visible {
+  outline: 2px solid var(--pulse-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+/* ------------------------------------------------------------------ head */
+
+.aura-pulse__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(14px, 2.4vw, 34px);
+  padding: clamp(16px, 2.2vw, 26px) clamp(16px, 2.4vw, 30px);
+  border-bottom: 1px solid var(--pulse-line);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .022), transparent);
+}
+.aura-pulse__identity { display: grid; gap: 7px; order: -1; grid-column: 1 / -1; }
+.aura-pulse__identity p {
+  margin: 0;
+  color: var(--pulse-dim);
+  font: 600 11px/1.3 var(--pulse-mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.aura-pulse__phase {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  width: fit-content;
+  padding: 4px 9px 4px 7px;
+  border-radius: 4px;
+  color: var(--pulse-accent);
+  background: rgba(255, 255, 255, .1);
+  font: 800 10px/1 var(--pulse-mono);
+  letter-spacing: .16em;
+}
+.aura-pulse__phase i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.aura-pulse__phase.is-live { color: var(--pulse-live); background: rgba(255, 106, 94, .12); }
+.aura-pulse__phase.is-live i { animation: aura-pulse__blink 1.6s ease-in-out infinite; }
+.aura-pulse__phase.is-final { color: var(--pulse-dim); background: rgba(255, 255, 255, .05); }
+.aura-pulse__phase.is-scheduled { color: var(--pulse-warn); background: rgba(255, 212, 126, .1); }
+.aura-pulse__phase.is-delayed,
+.aura-pulse__phase.is-postponed,
+.aura-pulse__phase.is-cancelled { color: var(--pulse-warn); background: rgba(255, 212, 126, .14); }
+.aura-pulse__score {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(10px, 2vw, 26px);
+}
+.aura-pulse__team {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 4px 0;
+  opacity: .68;
+  transition: opacity .35s ease;
+}
+.aura-pulse__team.is-leading { opacity: 1; }
+.aura-pulse__team.is-end { grid-template-columns: auto minmax(0, 1fr) 34px; text-align: right; }
+.aura-pulse__team.is-end > :is(i, .aura-pulse__team-logo) { order: 3; }
+.aura-pulse__team.is-end > b { order: 1; }
+.aura-pulse__team > i {
+  width: 4px;
+  justify-self: center;
+  align-self: stretch;
+  min-height: 40px;
+  border-radius: 4px;
+  background: var(--team);
+  box-shadow: 0 0 18px -2px var(--team);
+}
+.aura-pulse__team-logo {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .22));
+}
+.aura-pulse__team > div { display: grid; min-width: 0; gap: 3px; }
+.aura-pulse__team span {
+  color: var(--team);
+  font: 800 12px/1 var(--pulse-mono);
+  letter-spacing: .14em;
+}
+.aura-pulse__team strong {
+  overflow: hidden;
+  font: 750 clamp(15px, 1.5vw, 21px)/1.05 system-ui, sans-serif;
+  letter-spacing: -.024em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.aura-pulse__team small { color: var(--pulse-faint); font: 600 10px/1 var(--pulse-mono); letter-spacing: .08em; }
+.aura-pulse__team > b {
+  font: 800 clamp(34px, 4.6vw, 58px)/.85 system-ui, sans-serif;
+  letter-spacing: -.055em;
+  font-variant-numeric: tabular-nums;
+}
+.aura-pulse__team.is-leading > b { color: var(--team); }
+.aura-pulse__score-divider {
+  padding: 6px 10px;
+  border: 1px solid var(--pulse-line);
+  border-radius: 6px;
+  color: var(--pulse-dim);
+  background: var(--pulse-sunken);
+  font: 800 11px/1 var(--pulse-mono);
+  letter-spacing: .1em;
+  white-space: nowrap;
+}
+.aura-pulse__toolbar { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.aura-pulse__notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 11px clamp(16px, 2.4vw, 30px);
+  border-bottom: 1px solid var(--pulse-line);
+  background: rgba(255, 212, 126, .06);
+  list-style: none;
+}
+.aura-pulse__notes li {
+  padding: 4px 9px;
+  border: 1px solid rgba(255, 212, 126, .35);
+  border-radius: 4px;
+  color: var(--pulse-warn);
+  font: 700 10px/1.2 var(--pulse-mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.aura-pulse__livewire {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--pulse-live), transparent);
+  background-size: 220% 100%;
+  animation: aura-pulse__wire 3.4s linear infinite;
+}
+/* ------------------------------------------------------------------ body */
+
+.aura-pulse__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(288px, 330px);
+  align-items: start;
+}
+.aura-pulse__main { min-width: 0; padding: clamp(14px, 2vw, 22px) clamp(16px, 2.4vw, 30px) 18px; }
+.aura-pulse__rail {
+  display: grid;
+  align-content: start;
+  gap: 1px;
+  min-width: 0;
+  border-left: 1px solid var(--pulse-line);
+  background: var(--pulse-line);
+}
+.aura-pulse__chart-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 6px;
+}
+.aura-pulse__chart-head > div { display: grid; flex: 1 1 auto; min-width: 0; gap: 4px; }
+.aura-pulse__chart-head span {
+  font: 750 clamp(15px, 1.6vw, 19px)/1 system-ui, sans-serif;
+  letter-spacing: -.026em;
+}
+.aura-pulse__chart-head strong {
+  overflow: hidden;
+  color: var(--pulse-faint);
+  font: 600 9.5px/1.3 var(--pulse-mono);
+  letter-spacing: .08em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.aura-pulse__legend {
+  display: flex;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.aura-pulse__legend li {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border: 1px solid var(--pulse-line);
+  border-radius: 20px;
+  color: var(--pulse-dim);
+  font: 700 9.5px/1 var(--pulse-mono);
+  letter-spacing: .1em;
+  white-space: nowrap;
+}
+.aura-pulse__legend li em { color: var(--pulse-faint); font-style: normal; letter-spacing: .02em; }
+.aura-pulse__legend li::before {
+  content: "";
+  width: 9px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--chip);
+}
+.aura-pulse__legend li.is-overlay::before {
+  height: 0;
+  border-top: 2px dashed var(--chip);
+  border-radius: 0;
+  background: none;
+}
+/* ----------------------------------------------------------------- chart */
+
+.aura-pulse__chart {
+  position: relative;
+  margin: 4px 0 2px;
+  cursor: crosshair;
+  touch-action: pan-y;
+}
+.aura-pulse__canvas { display: block; width: 100%; overflow: visible; }
+.aura-pulse__band-label {
+  fill: var(--pulse-faint);
+  font: 700 9px/1 var(--pulse-mono);
+  letter-spacing: .1em;
+}
+.aura-pulse__divider { stroke: var(--pulse-line); stroke-width: 1; shape-rendering: crispEdges; }
+.aura-pulse__midline {
+  stroke: rgba(244, 247, 239, .42);
+  stroke-width: 1;
+  stroke-dasharray: 2 5;
+}
+.aura-pulse__boundary {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 7px rgba(255, 255, 255, .3));
+}
+.aura-pulse__stroke { fill: none; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.aura-pulse__overlay path { fill: none; stroke-width: 1.6; opacity: .85; stroke-linejoin: round; }
+.aura-pulse__cursorline { stroke: rgba(244, 247, 239, .68); stroke-width: 1; stroke-dasharray: 3 3; }
+.aura-pulse__dot {
+  stroke: var(--pulse-surface);
+  stroke-width: 3;
+  transition: cy .18s cubic-bezier(.22, 1, .36, 1);
+}
+.aura-pulse__empty-shape line { stroke: var(--pulse-line-strong); stroke-width: 1; stroke-dasharray: 5 6; }
+.aura-pulse__marker { cursor: pointer; animation: aura-pulse__marker-in .5s cubic-bezier(.16, 1, .3, 1) both; }
+.aura-pulse__marker-hit { fill: transparent; }
+.aura-pulse__marker > circle:not(.aura-pulse__marker-hit),
+.aura-pulse__marker > path {
+  stroke: var(--pulse-surface);
+  stroke-width: 2;
+  transition: transform .2s cubic-bezier(.22, 1, .36, 1);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.aura-pulse__marker:hover > circle:not(.aura-pulse__marker-hit),
+.aura-pulse__marker:hover > path { transform: scale(1.35); }
+.aura-pulse__marker.is-focused > circle:not(.aura-pulse__marker-hit),
+.aura-pulse__marker.is-focused > path {
+  stroke: var(--pulse-ink);
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 9px currentColor);
+}
+.aura-pulse__edge {
+  position: absolute;
+  top: 34px;
+  right: 10px;
+  bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+}
+.aura-pulse__edge span {
+  display: grid;
+  justify-items: end;
+  gap: 2px;
+  padding: 5px 9px;
+  border-radius: 5px;
+  background: rgba(9, 11, 10, .72);
+  backdrop-filter: blur(6px);
+}
+.aura-pulse__edge b { color: var(--edge); font: 800 11px/1 var(--pulse-mono); letter-spacing: .13em; }
+.aura-pulse__edge em {
+  color: var(--pulse-ink);
+  font: 800 17px/1 system-ui, sans-serif;
+  font-style: normal;
+  letter-spacing: -.03em;
+}
+.aura-pulse__canvas-empty {
+  position: absolute;
+  inset: 34px 0 30px;
+  display: grid;
+  place-content: center;
+  color: var(--pulse-faint);
+  font: 700 11px/1 var(--pulse-mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.aura-pulse__tooltip {
+  position: absolute;
+  top: 6px;
+  z-index: 4;
+  display: grid;
+  gap: 4px;
+  min-width: 150px;
+  padding: 9px 11px;
+  border: 1px solid var(--pulse-line-strong);
+  border-radius: 8px;
+  background: rgba(9, 11, 10, .94);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, .55);
+  pointer-events: none;
+  transform: translateX(14px);
+}
+.aura-pulse__tooltip[data-flip="left"] { transform: translateX(calc(-100% - 14px)); }
+.aura-pulse__tooltip span {
+  color: var(--pulse-faint);
+  font: 700 9px/1 var(--pulse-mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.aura-pulse__tooltip strong {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font: 700 13px/1.2 var(--pulse-mono);
+}
+.aura-pulse__tooltip strong i { width: 8px; height: 8px; border-radius: 2px; }
+.aura-pulse__tooltip em {
+  color: var(--pulse-dim);
+  font: 600 10.5px/1.3 var(--pulse-mono);
+  font-style: normal;
+}
+/* ------------------------------------------------------------- transport */
+
+.aura-pulse__transport {
+  display: grid;
+  grid-template-columns: 34px 28px minmax(0, 1fr) 28px auto;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+.aura-pulse__transport button {
+  display: grid;
+  height: 28px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--pulse-line-strong);
+  border-radius: 6px;
+  color: var(--pulse-dim);
+  background: var(--pulse-raised);
+  font: 700 12px/1 var(--pulse-mono);
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+}
+.aura-pulse__transport button:hover:not(:disabled) { color: var(--pulse-ink); border-color: var(--pulse-line-strong); background: #1d241f; }
+.aura-pulse__transport button:disabled { opacity: .4; cursor: not-allowed; }
+.aura-pulse__play { width: 34px; color: var(--pulse-accent) !important; }
+.aura-pulse__now { width: auto; padding: 0 11px !important; letter-spacing: .12em; }
+.aura-pulse__transport input {
+  width: 100%;
+  height: 4px;
+  margin: 0;
+  appearance: none;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--pulse-accent) var(--progress), var(--pulse-line) var(--progress));
+  cursor: pointer;
+}
+.aura-pulse__transport input::-webkit-slider-thumb {
+  width: 14px;
+  height: 14px;
+  appearance: none;
+  border: 3px solid var(--pulse-surface);
+  border-radius: 50%;
+  background: var(--pulse-accent);
+  box-shadow: 0 0 0 1px var(--pulse-accent);
+}
+.aura-pulse__transport input::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: 3px solid var(--pulse-surface);
+  border-radius: 50%;
+  background: var(--pulse-accent);
+}
+.aura-pulse__cursor-readout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0 0;
+  color: var(--pulse-dim);
+  font: 600 11px/1 var(--pulse-mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.aura-pulse__cursor-readout span {
+  padding: 4px 7px;
+  border-radius: 4px;
+  color: var(--pulse-accent);
+  background: rgba(255, 255, 255, .1);
+  font-weight: 800;
+}
+/* -------------------------------------------------------------- rail: state */
+
+.aura-pulse__state,
+.aura-pulse__reveal {
+  padding: clamp(14px, 1.8vw, 18px);
+  background: var(--pulse-surface);
+}
+.aura-pulse__state > header,
+.aura-pulse__reveal > header,
+.aura-pulse__picker > header,
+.aura-pulse__turning > header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 13px;
+}
+.aura-pulse__state > header span,
+.aura-pulse__reveal > header span,
+.aura-pulse__picker > header span,
+.aura-pulse__turning > header span {
+  color: var(--pulse-faint);
+  font: 800 9.5px/1 var(--pulse-mono);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.aura-pulse__state > header strong { font: 800 13px/1 var(--pulse-mono); letter-spacing: .02em; }
+.aura-pulse__reveal > header small,
+.aura-pulse__picker > header small,
+.aura-pulse__turning > header small {
+  color: var(--pulse-dim);
+  font: 700 9.5px/1 var(--pulse-mono);
+  letter-spacing: .08em;
+}
+.aura-pulse__state-grid { display: grid; grid-template-columns: 108px minmax(0, 1fr); gap: 14px; align-items: center; }
+.aura-pulse__diamond { display: grid; gap: 6px; justify-items: center; margin: 0; }
+.aura-pulse__diamond svg { width: 100px; height: 100px; }
+.aura-pulse__diamond-path { fill: rgba(255, 255, 255, .035); stroke: #4a564d; stroke-width: 2; }
+.aura-pulse__base {
+  fill: rgba(255, 255, 255, .05);
+  stroke: var(--pulse-line-strong);
+  stroke-width: 1.5;
+  transition: fill .35s cubic-bezier(.22, 1, .36, 1), stroke .35s ease, filter .35s ease;
+}
+.aura-pulse__base.is-occupied {
+  fill: var(--base);
+  stroke: var(--base);
+  filter: drop-shadow(0 0 4px var(--base));
+  animation: aura-pulse__base-in .4s cubic-bezier(.16, 1, .3, 1);
+}
+.aura-pulse__plate { fill: rgba(255, 255, 255, .16); stroke: var(--pulse-line-strong); stroke-width: 1.2; }
+.aura-pulse__diamond figcaption {
+  color: var(--pulse-faint);
+  font: 700 9px/1 var(--pulse-mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.aura-pulse__clock {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 6px;
+  height: 100px;
+  border: 1px solid var(--pulse-line);
+  border-radius: 10px;
+  background: var(--pulse-sunken);
+}
+.aura-pulse__clock span { color: var(--pulse-warn); font: 800 11px/1 var(--pulse-mono); letter-spacing: .14em; }
+.aura-pulse__clock strong { font: 800 26px/1 system-ui, sans-serif; letter-spacing: -.04em; }
+.aura-pulse__count { display: grid; gap: 1px; margin: 0; background: var(--pulse-line); }
+.aura-pulse__count > div {
+  display: grid;
+  grid-template-columns: minmax(54px, max-content) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 10px;
+  background: var(--pulse-sunken);
+}
+.aura-pulse__count dt {
+  color: var(--pulse-faint);
+  font: 700 9px/1 var(--pulse-mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.aura-pulse__count dd { margin: 0; display: flex; align-items: center; gap: 8px; }
+.aura-pulse__count dd.is-numeric {
+  justify-self: end;
+  font: 800 12px/1 var(--pulse-mono);
+  text-align: right;
+  white-space: nowrap;
+}
+.aura-pulse__count dd.is-muted { color: var(--pulse-faint); }
+.aura-pulse__count dd.is-team {
+  padding: 3px 7px;
+  border-radius: 4px;
+  color: var(--team);
+  background: color-mix(in srgb, var(--team) 14%, transparent);
+  font: 800 11px/1 var(--pulse-mono);
+  letter-spacing: .1em;
+}
+.aura-pulse__pips { display: inline-flex; gap: 4px; }
+.aura-pulse__pips i {
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--pulse-line-strong);
+  border-radius: 50%;
+  transition: background .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.aura-pulse__pips.is-ball i.is-on { border-color: #7fd0ff; background: #7fd0ff; box-shadow: 0 0 7px rgba(127, 208, 255, .55); }
+.aura-pulse__pips.is-strike i.is-on { border-color: var(--pulse-warn); background: var(--pulse-warn); box-shadow: 0 0 7px rgba(255, 212, 126, .55); }
+.aura-pulse__pips.is-out i.is-on { border-color: var(--pulse-live); background: var(--pulse-live); box-shadow: 0 0 7px rgba(255, 106, 94, .5); }
+.aura-pulse__court { margin-top: 14px; }
+.aura-pulse__court svg {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--pulse-line);
+  border-radius: 8px;
+  background: var(--pulse-sunken);
+}
+.aura-pulse__court-line { fill: none; stroke: var(--pulse-line-strong); stroke-width: .3; }
+.aura-pulse__shot { fill: rgba(244, 247, 239, .18); stroke: rgba(244, 247, 239, .32); stroke-width: .12; }
+.aura-pulse__shot.is-made { fill: var(--pulse-accent); stroke: none; opacity: .82; }
+.aura-pulse__shot.is-recent { animation: aura-pulse__shot-in .5s cubic-bezier(.16, 1, .3, 1) both; }
+.aura-pulse__court footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 7px;
+  color: var(--pulse-faint);
+  font: 700 8.5px/1.3 var(--pulse-mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.aura-pulse__court.is-empty {
+  display: grid;
+  gap: 6px;
+  padding: 14px;
+  border: 1px dashed var(--pulse-line-strong);
+  border-radius: 8px;
+}
+.aura-pulse__court.is-empty span {
+  color: var(--pulse-faint);
+  font: 800 9px/1 var(--pulse-mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.aura-pulse__court.is-empty p { margin: 0; color: var(--pulse-dim); font-size: 11.5px; line-height: 1.45; }
+/* ------------------------------------------------------------ rail: reveal */
+
+.aura-pulse__reveal-play {
+  margin: 0 0 13px;
+  font: 700 clamp(14px, 1.5vw, 17px)/1.28 system-ui, sans-serif;
+  letter-spacing: -.018em;
+  animation: aura-pulse__copy-in .34s cubic-bezier(.16, 1, .3, 1) both;
+}
+.aura-pulse__reveal-play.is-scoring { color: var(--pulse-accent); }
+.aura-pulse__reveal-people { display: grid; gap: 1px; background: var(--pulse-line); }
+.aura-pulse__reveal-people article {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 12px;
+  padding: 11px;
+  background: var(--pulse-sunken);
+  border-left: 2px solid var(--team);
+}
+.aura-pulse__reveal-people figure {
+  position: relative;
+  display: grid;
+  width: 52px;
+  height: 58px;
+  place-items: center;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 7px 7px 3px 3px;
+  background: color-mix(in srgb, var(--team) 22%, #0c0f0d);
+}
+.aura-pulse__reveal-people figure img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.aura-pulse__reveal-people figure b {
+  color: var(--pulse-ink);
+  font: 800 16px/1 system-ui, sans-serif;
+  letter-spacing: -.02em;
+  opacity: .85;
+}
+.aura-pulse__reveal-people > article > div { display: grid; align-content: center; gap: 4px; min-width: 0; }
+.aura-pulse__reveal-people span {
+  color: var(--team);
+  font: 700 9px/1 var(--pulse-mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.aura-pulse__reveal-people strong {
+  overflow: hidden;
+  font: 750 15px/1.1 system-ui, sans-serif;
+  letter-spacing: -.024em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.aura-pulse__reveal-people ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 2px 0 0; padding: 0; list-style: none; }
+.aura-pulse__reveal-people li { font: 800 11.5px/1 var(--pulse-mono); }
+.aura-pulse__reveal-people li em { margin-right: 4px; color: var(--pulse-faint); font-style: normal; font-weight: 700; }
+.aura-pulse__reveal-people li.is-quiet { color: var(--pulse-faint); font-weight: 600; }
+.aura-pulse__reveal > footer {
+  margin-top: 10px;
+  color: var(--pulse-faint);
+  font: 600 9.5px/1.4 var(--pulse-mono);
+  letter-spacing: .04em;
+}
+.aura-pulse__quiet { margin: 0; color: var(--pulse-dim); font-size: 12px; line-height: 1.5; }
+/* --------------------------------------------------------------- footer grid */
+
+.aura-pulse__footer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1px;
+  border-top: 1px solid var(--pulse-line);
+  background: var(--pulse-line);
+}
+.aura-pulse__picker,
+.aura-pulse__turning {
+  min-width: 0;
+  padding: clamp(14px, 1.8vw, 20px) clamp(16px, 2.2vw, 24px);
+  background: var(--pulse-surface);
+}
+.aura-pulse__picker-group + .aura-pulse__picker-group { margin-top: 14px; }
+.aura-pulse__picker-group h4 {
+  margin: 0 0 7px;
+  color: var(--pulse-dim);
+  font: 800 9px/1 var(--pulse-mono);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.aura-pulse__picker-group ul { display: grid; gap: 5px; margin: 0; padding: 0; list-style: none; }
+.aura-pulse__picker-group li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px; }
+.aura-pulse__picker-main {
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  text-align: left;
+  border: 1px solid var(--pulse-line);
+  border-radius: 7px;
+  color: inherit;
+  background: var(--pulse-sunken);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease;
+}
+.aura-pulse__picker-main:hover:not(:disabled) { border-color: var(--pulse-line-strong); background: #141915; }
+.aura-pulse__picker-main:disabled { cursor: not-allowed; opacity: .5; }
+.aura-pulse__picker-main i {
+  width: 10px;
+  height: 10px;
+  border: 2px solid;
+  border-radius: 3px;
+}
+.aura-pulse__picker-main span { display: grid; gap: 3px; min-width: 0; }
+.aura-pulse__picker-main strong {
+  overflow: hidden;
+  font: 700 12.5px/1.1 system-ui, sans-serif;
+  letter-spacing: -.01em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.aura-pulse__picker-main em {
+  overflow: hidden;
+  color: var(--pulse-faint);
+  font: 600 9.5px/1.2 var(--pulse-mono);
+  font-style: normal;
+  letter-spacing: .04em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.aura-pulse__picker-main b {
+  color: var(--pulse-faint);
+  font: 800 8.5px/1 var(--pulse-mono);
+  letter-spacing: .12em;
+}
+.aura-pulse__picker li.is-primary .aura-pulse__picker-main { border-color: var(--pulse-accent); background: rgba(255, 255, 255, .07); }
+.aura-pulse__picker li.is-primary .aura-pulse__picker-main b { color: var(--pulse-accent); }
+.aura-pulse__picker li.is-overlay .aura-pulse__picker-main { border-color: var(--pulse-line-strong); }
+.aura-pulse__picker li.is-overlay .aura-pulse__picker-main b { color: var(--pulse-warn); }
+.aura-pulse__picker li.is-unavailable .aura-pulse__picker-main { opacity: .48; cursor: not-allowed; }
+.aura-pulse__picker-layer {
+  padding: 0 9px;
+  border: 1px solid var(--pulse-line);
+  border-radius: 6px;
+  color: var(--pulse-dim);
+  background: transparent;
+  font: 700 9px/1 var(--pulse-mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.aura-pulse__picker-layer:hover:not(:disabled) { color: var(--pulse-ink); border-color: var(--pulse-line-strong); }
+.aura-pulse__picker-layer:disabled { opacity: .35; cursor: not-allowed; }
+.aura-pulse__picker-reason {
+  grid-column: 1 / -1;
+  margin: 0 0 2px;
+  color: var(--pulse-faint);
+  font: 600 9.5px/1.35 var(--pulse-mono);
+}
+.aura-pulse__picker-reason.is-note { color: var(--pulse-warn); opacity: .8; }
+.aura-pulse__picker > footer {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--pulse-line);
+  color: var(--pulse-faint);
+  font: 600 10px/1.5 var(--pulse-mono);
+}
+.aura-pulse__turning ol { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.aura-pulse__turning button {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  padding: 9px 10px;
+  text-align: left;
+  border: 1px solid transparent;
+  border-left: 2px solid var(--event);
+  border-radius: 0 7px 7px 0;
+  color: inherit;
+  background: var(--pulse-sunken);
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, transform .18s cubic-bezier(.22, 1, .36, 1);
+}
+.aura-pulse__turning button:hover { background: #171d18; transform: translateX(2px); }
+.aura-pulse__turning button.is-active { border-color: var(--pulse-accent); border-left-color: var(--event); background: rgba(255, 255, 255, .07); }
+.aura-pulse__turning time { color: var(--pulse-accent); font: 800 10.5px/1 var(--pulse-mono); }
+.aura-pulse__turning button span { display: grid; gap: 3px; min-width: 0; }
+.aura-pulse__turning button strong {
+  overflow: hidden;
+  font: 700 12.5px/1.15 system-ui, sans-serif;
+  letter-spacing: -.012em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.aura-pulse__turning button em {
+  overflow: hidden;
+  color: var(--pulse-faint);
+  font: 600 9.5px/1.25 var(--pulse-mono);
+  font-style: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.aura-pulse__turning button b {
+  color: var(--event);
+  font: 800 8.5px/1 var(--pulse-mono);
+  letter-spacing: .1em;
+}
+/* --------------------------------------------------------------- pregame */
+
+.aura-pulse__pregame {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(272px, 1fr));
+  gap: 1px;
+  background: var(--pulse-line);
+}
+.aura-pulse__pregame > section {
+  min-width: 0;
+  padding: clamp(15px, 2vw, 20px);
+  background: var(--pulse-surface);
+}
+.aura-pulse__pregame-form,
+.aura-pulse__pregame-watch { grid-column: 1 / -1; }
+.aura-pulse__pregame-watch > div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 6px;
+}
+.aura-pulse__pregame > section > header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 13px;
+}
+.aura-pulse__pregame > section > header span {
+  color: var(--pulse-faint);
+  font: 800 9.5px/1 var(--pulse-mono);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.aura-pulse__pregame > section > header small { color: var(--pulse-dim); font: 700 9px/1 var(--pulse-mono); letter-spacing: .08em; }
+.aura-pulse__pregame-form > div { display: grid; gap: 8px; }
+.aura-pulse__form-row {
+  display: grid;
+  grid-template-columns: 54px 74px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 9px 11px;
+  border-left: 2px solid var(--team);
+  border-radius: 0 8px 8px 0;
+  background: var(--pulse-sunken);
+}
+.aura-pulse__form-row > b { color: var(--team); font: 800 13px/1 var(--pulse-mono); letter-spacing: .1em; }
+.aura-pulse__form-row > span { color: var(--pulse-dim); font: 700 11px/1 var(--pulse-mono); }
+.aura-pulse__form-row ol { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.aura-pulse__form-row li { display: grid; justify-items: center; gap: 3px; }
+.aura-pulse__form-row li i {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  border-radius: 5px;
+  font: 800 11px/1 var(--pulse-mono);
+  font-style: normal;
+}
+.aura-pulse__form-row li.is-w i { color: #08140d; background: var(--pulse-accent); }
+.aura-pulse__form-row li.is-l i { color: var(--pulse-ink); background: rgba(255, 106, 94, .24); }
+.aura-pulse__form-row li.is-t i { color: var(--pulse-ink); background: rgba(255, 255, 255, .1); }
+.aura-pulse__form-row li em { color: var(--pulse-faint); font: 600 8.5px/1 var(--pulse-mono); font-style: normal; }
+.aura-pulse__form-row li.is-empty { color: var(--pulse-faint); font: 600 10px/1 var(--pulse-mono); }
+.aura-pulse__pregame table { width: 100%; border-collapse: collapse; }
+.aura-pulse__pregame th,
+.aura-pulse__pregame td { padding: 7px 4px; }
+.aura-pulse__pregame thead th {
+  border-bottom: 1px solid var(--pulse-line);
+  font: 800 10px/1 var(--pulse-mono);
+  letter-spacing: .12em;
+}
+.aura-pulse__pregame thead th:first-child { text-align: left; }
+.aura-pulse__pregame thead th:last-child { text-align: right; }
+.aura-pulse__pregame tbody th {
+  color: var(--pulse-faint);
+  font: 700 9.5px/1 var(--pulse-mono);
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+.aura-pulse__pregame tbody td { font: 800 14px/1 var(--pulse-mono); }
+.aura-pulse__pregame tbody td:first-child { text-align: left; }
+.aura-pulse__pregame tbody td:last-child { text-align: right; }
+.aura-pulse__pregame tbody td.is-favoured { color: var(--pulse-accent); }
+.aura-pulse__pregame tbody tr + tr th,
+.aura-pulse__pregame tbody tr + tr td { border-top: 1px solid rgba(255, 255, 255, .04); }
+.aura-pulse__pregame-watch > div { display: grid; gap: 6px; }
+.aura-pulse__pregame-watch article {
+  display: grid;
+  grid-template-columns: 38px 42px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 11px;
+  border-left: 2px solid var(--team);
+  border-radius: 0 8px 8px 0;
+  background: var(--pulse-sunken);
+}
+.aura-pulse__pregame-photo {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--team) 16%, var(--pulse-panel));
+}
+.aura-pulse__pregame-photo img { width: 100%; height: 100%; object-fit: cover; }
+.aura-pulse__pregame-watch b { color: var(--team); font: 800 11px/1 var(--pulse-mono); letter-spacing: .1em; }
+.aura-pulse__pregame-watch div div { display: grid; gap: 3px; min-width: 0; }
+.aura-pulse__pregame-watch strong {
+  overflow: hidden;
+  font: 700 13.5px/1.1 system-ui, sans-serif;
+  letter-spacing: -.02em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.aura-pulse__pregame-watch span { color: var(--pulse-faint); font: 600 9px/1 var(--pulse-mono); letter-spacing: .1em; text-transform: uppercase; }
+.aura-pulse__pregame-watch em { color: var(--pulse-dim); font: 700 11px/1 var(--pulse-mono); font-style: normal; }
+/* ------------------------------------------------------- status & skeleton */
+
+.aura-pulse__status {
+  display: grid;
+  gap: 9px;
+  justify-items: center;
+  padding: clamp(40px, 8vw, 88px) 24px;
+  text-align: center;
+}
+.aura-pulse__status span {
+  color: var(--pulse-faint);
+  font: 800 9.5px/1 var(--pulse-mono);
+  letter-spacing: .18em;
+}
+.aura-pulse__status.is-error span { color: var(--pulse-live); }
+.aura-pulse__status strong {
+  max-width: 30ch;
+  font: 750 clamp(19px, 2.6vw, 27px)/1.2 system-ui, sans-serif;
+  letter-spacing: -.032em;
+}
+.aura-pulse__status p { max-width: 46ch; margin: 0; color: var(--pulse-dim); font-size: 13px; line-height: 1.55; }
+.aura-pulse__skeleton { gap: 1px; padding: 0; background: var(--pulse-line); }
+.aura-pulse__skeleton-head { display: grid; gap: 16px; padding: 24px; background: var(--pulse-surface); }
+.aura-pulse__skeleton-head > div { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.aura-pulse__skeleton-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); gap: 1px; }
+.aura-pulse__skeleton-body > i { display: block; background: var(--pulse-surface); }
+.aura-shimmer {
+  display: block;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #141915 25%, #1c231e 50%, #141915 75%);
+  background-size: 280% 100%;
+  animation: aura-shimmer 1.5s linear infinite;
+}
+@media (max-width: 900px) {
+  .aura-pulse__head { grid-template-columns: minmax(0, 1fr); }
+  .aura-pulse__toolbar { justify-content: flex-start; }
+  .aura-pulse__footer-grid { grid-template-columns: minmax(0, 1fr); }
+  .aura-pulse__skeleton-body { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .aura-pulse { border-radius: 14px; }
+  .aura-pulse__score { grid-template-columns: minmax(0, 1fr) auto; row-gap: 10px; }
+  .aura-pulse__score-divider { grid-row: 1 / span 2; grid-column: 2; align-self: center; }
+  .aura-pulse__team.is-end { grid-template-columns: 34px minmax(0, 1fr) auto; text-align: left; }
+  .aura-pulse__team.is-end > :is(i, .aura-pulse__team-logo) { order: 0; }
+  .aura-pulse__team.is-end > b { order: 3; }
+  .aura-pulse__team > b { font-size: 34px; }
+  .aura-pulse__team strong { font-size: 14px; }
+  .aura-pulse__chart-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .aura-pulse__edge { top: 30px; right: 6px; }
+  .aura-pulse__edge em { font-size: 14px; }
+  .aura-pulse__transport { grid-template-columns: 34px 28px minmax(0, 1fr) 28px; row-gap: 10px; }
+  .aura-pulse__now { grid-column: 1 / -1; height: 30px; }
+  .aura-pulse__state-grid { grid-template-columns: minmax(0, 1fr); justify-items: stretch; }
+  .aura-pulse__diamond { justify-self: center; }
+  .aura-pulse__clock { height: 76px; }
+  .aura-pulse__tooltip { min-width: 128px; padding: 7px 9px; }
+  .aura-pulse__pregame { grid-template-columns: minmax(0, 1fr); }
+  .aura-pulse__form-row { grid-template-columns: 44px minmax(0, 1fr); row-gap: 8px; }
+  .aura-pulse__form-row ol { grid-column: 1 / -1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aura-pulse *,
+  .aura-pulse *::before,
+  .aura-pulse *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+/* ------------------------------------------------------------- line score */
+
+.aura-pulse__linescore { margin-top: 18px; padding-top: 15px; border-top: 1px solid var(--pulse-line); }
+.aura-pulse__linescore > header { margin-bottom: 9px; }
+.aura-pulse__linescore > header span {
+  color: var(--pulse-faint);
+  font: 800 9.5px/1 var(--pulse-mono);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.aura-pulse__linescore-scroll { overflow-x: auto; }
+.aura-pulse__linescore table { border-collapse: collapse; font: 800 12px/1 var(--pulse-mono); }
+.aura-pulse__linescore th,
+.aura-pulse__linescore td {
+  min-width: 30px;
+  padding: 6px 4px;
+  text-align: center;
+  border-bottom: 1px solid var(--pulse-line);
+}
+.aura-pulse__linescore thead th {
+  color: var(--pulse-faint);
+  font: 700 9.5px/1 var(--pulse-mono);
+  letter-spacing: .06em;
+}
+.aura-pulse__linescore thead th button {
+  padding: 3px 5px;
+  border: 0;
+  border-radius: 4px;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+.aura-pulse__linescore thead th button:hover { color: var(--pulse-ink); background: rgba(255, 255, 255, .06); }
+.aura-pulse__linescore tbody th {
+  min-width: 44px;
+  color: var(--team);
+  font: 800 11px/1 var(--pulse-mono);
+  letter-spacing: .1em;
+  text-align: left;
+}
+.aura-pulse__linescore tbody td { color: var(--pulse-faint); }
+.aura-pulse__linescore tbody td.is-scored { color: var(--pulse-ink); }
+.aura-pulse__linescore .is-current { background: rgba(255, 255, 255, .05); }
+.aura-pulse__linescore .is-total {
+  border-left: 1px solid var(--pulse-line);
+  color: var(--pulse-ink) !important;
+  font-size: 13px;
+}
+.aura-pulse__linescore tbody tr:last-child th,
+.aura-pulse__linescore tbody tr:last-child td { border-bottom: 0; }
+.aura-pulse__pregame .aura-pulse__gaps { display: grid; gap: 7px; margin: 11px 0 0; padding: 0; list-style: none; }
+.aura-pulse__pregame .aura-pulse__gaps li {
+  display: grid;
+  gap: 3px;
+  padding: 9px 10px;
+  border-left: 2px solid var(--pulse-line-strong);
+  border-radius: 0 6px 6px 0;
+  background: var(--pulse-sunken);
+  color: var(--pulse-dim);
+  font-size: 11.5px;
+  line-height: 1.45;
+}
+.aura-pulse__pregame .aura-pulse__gaps b {
+  color: var(--pulse-faint);
+  font: 800 9px/1 var(--pulse-mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.aura-pulse__team > b.is-empty {
+  width: 34px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--pulse-line-strong);
+}
+.aura-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes aura-pulse__wire { to { background-position: -220% 0; } }
+@keyframes aura-pulse__marker-in { from { opacity: 0; transform: translateY(10px) scale(.4); } }
+@keyframes aura-pulse__base-in { from { transform: scale(.55); transform-origin: center; } }
+@keyframes aura-pulse__copy-in { from { opacity: 0; transform: translateY(7px); } }
+@keyframes aura-pulse__shot-in { from { opacity: 0; r: 0; } }
+@keyframes aura-shimmer { to { background-position: -280% 0; } }

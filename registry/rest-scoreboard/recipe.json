@@ -1,0 +1,126 @@
+{
+  "id": "aura.rest-scoreboard.react-next",
+  "component": "rest-scoreboard",
+  "dataPlane": "aura-only",
+  "typedManifest": "lib/aura/rest-scoreboard-data.ts",
+  "deliveryMode": "snapshot-poll-or-replay",
+  "dataManifest": {
+    "version": 1,
+    "component": "rest-scoreboard",
+    "delivery": {
+      "primary": "poll",
+      "snapshot": [
+        "game",
+        "game-frame"
+      ],
+      "poll": {
+        "everyMs": 15000,
+        "while": "not-final",
+        "transport": "request-metered-rest"
+      },
+      "replay": "Request one bounded point-in-time replay; never replace a missing archive with fixture data."
+    },
+    "requests": [
+      {
+        "id": "game",
+        "method": "GET",
+        "path": "/api/games/{gameId}",
+        "view": "card",
+        "fields": [
+          "id",
+          "sport",
+          "league",
+          "phase",
+          "startsAtMs",
+          "updatedAt",
+          "teams.away.abbreviation",
+          "teams.away.displayName",
+          "teams.away.score",
+          "teams.home.abbreviation",
+          "teams.home.displayName",
+          "teams.home.score"
+        ]
+      },
+      {
+        "id": "game-frame",
+        "method": "GET",
+        "path": "/api/games/{gameId}/frame",
+        "view": "atomic-frame",
+        "fields": [
+          "gameId",
+          "updatedAt",
+          "scoreboard",
+          "state",
+          "state.surface",
+          "state.label",
+          "state.possessionTeamId",
+          "state.situation",
+          "state.coordinates",
+          "latestPlay",
+          "featuredPlayer"
+        ]
+      },
+      {
+        "id": "replay",
+        "method": "GET",
+        "path": "/api/games/{gameId}/replay",
+        "view": "point-in-time",
+        "fields": [
+          "gameId",
+          "replayAt",
+          "game",
+          "observation",
+          "plays[]"
+        ],
+        "parameters": [
+          "at={epochMs}",
+          "limit=250",
+          "includeBoxscore={true|false}"
+        ]
+      },
+      {
+        "id": "activation-coverage",
+        "method": "GET",
+        "path": "/api/coverage",
+        "view": "product-coverage",
+        "fields": [
+          "sports[].sport",
+          "sports[].availability"
+        ],
+        "purpose": "Credential-safe activation context; not part of the polling render path."
+      }
+    ],
+    "relationships": [
+      "Game.id -> GameFrame.gameId",
+      "Game.id -> Replay.gameId",
+      "Replay.observation.gameId -> GameFrame.gameId"
+    ],
+    "unavailable": [
+      "A missing GameFrame renders unavailable or stale, never fixture data while connected.",
+      "A replay without retained observations is unavailable; the starter never fabricates a timeline.",
+      "Polling stops at a final phase and reports the last measured request count.",
+      "Credentials stay in the copied server bridge and never enter browser source or request URLs."
+    ]
+  },
+  "objects": [
+    "Game",
+    "GameFrame",
+    "Replay",
+    "Coverage"
+  ],
+  "instructions": [
+    "Render auraRestScoreboardFixture first; fixture mode never requires a key.",
+    "Create one memoized createAuraLiveScoreboardClient() in a client component and pass it with an Aura gameId to useAuraRestScoreboard().",
+    "Use mode='poll' for RapidAPI request-metered REST and mode='replay' with an optional epoch millisecond at value for retained history.",
+    "The browser calls only the copied same-origin route. Keep AURA_API_KEY or RapidAPI credentials in server-only environment variables.",
+    "The starter intentionally polls REST; direct Aura resumable SSE remains a separate live-scoreboard adapter.",
+    "Connecting, polling, stale, final, replay, unavailable, and error remain explicit states."
+  ],
+  "customization": {
+    "howTo": "To pull more or fewer fields, edit the fields= list in this component\u2019s client and the matching *-types.ts. Allowlists are published per object in GET /api/catalog (fieldCatalog); unknown or duplicate fields return 400.",
+    "fieldCatalogObjects": [
+      "game-detail"
+    ],
+    "docs": "docs/component-data-customization.md"
+  }
+}

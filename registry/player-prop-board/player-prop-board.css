@@ -1,0 +1,269 @@
+/* Generated from @aura/ui-themes by sync-registry-styles.mjs — do not hand-edit.
+ * Regenerate: node packages/ui/cli/scripts/sync-registry-styles.mjs */
+
+/*
+ * Aura design tokens.
+ *
+ * Night + white-hot glow: a deep, cool night canvas where the accent is
+ * pure white light — buttons, active states, and live elements glow like
+ * an aura. No brand hue; light itself is the brand. Status colors are
+ * bright and cool so they pop against the dark.
+ * A clean light theme exists under data-aura-theme="light".
+ */
+
+:root {
+  /* Surfaces — cool night */
+  --aura-canvas: #08090b;
+  --aura-surface: #0e1013;
+  --aura-elevated: #15181d;
+  --aura-overlay: #1c2027;
+
+  /* Lines */
+  --aura-line: #1f232a;
+  --aura-line-strong: #2f353e;
+
+  /* Ink */
+  --aura-text: #f5f7fa;
+  --aura-muted: #9aa3ae;
+  --aura-faint: #5d6570;
+
+  /* Accent — white light */
+  --aura-accent: #ffffff;
+  --aura-accent-strong: #dfe5ec;
+  --aura-accent-ink: #0a0b0d;
+  --aura-accent-soft: rgba(255, 255, 255, 0.08);
+  --aura-accent-line: rgba(255, 255, 255, 0.35);
+
+  /* Semantic status — bright on night */
+  --aura-positive: #7fe0a8;
+  --aura-positive-soft: rgba(127, 224, 168, 0.12);
+  --aura-warning: #ffd47e;
+  --aura-warning-soft: rgba(255, 212, 126, 0.12);
+  --aura-danger: #ff8a7e;
+  --aura-danger-soft: rgba(255, 138, 126, 0.12);
+  --aura-info: #8fc2ff;
+  --aura-info-soft: rgba(143, 194, 255, 0.12);
+
+  /* Type */
+  --aura-font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --aura-font-mono: 'DM Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --aura-label: 700 10px/1 var(--aura-font-mono);
+  --aura-label-tracking: 0.12em;
+
+  /* Radius */
+  --aura-radius-sm: 6px;
+  --aura-radius-md: 10px;
+  --aura-radius-lg: 14px;
+  --aura-radius-xl: 20px;
+  --aura-radius-full: 999px;
+  --aura-radius: var(--aura-radius-lg);
+
+  /* Elevation + glow */
+  --aura-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --aura-shadow-2: 0 12px 32px rgba(0, 0, 0, 0.44);
+  --aura-shadow-3: 0 28px 80px rgba(0, 0, 0, 0.55);
+  --aura-glow-accent: 0 0 22px rgba(255, 255, 255, 0.38);
+  --aura-glow-soft: 0 0 44px rgba(255, 255, 255, 0.1);
+
+  /* Halo washes for heroes and stages */
+  --aura-halo-gold: rgba(255, 255, 255, 0.055);
+  --aura-halo-sky: rgba(143, 194, 255, 0.05);
+
+  /* Focus */
+  --aura-focus: 0 0 0 2px var(--aura-canvas), 0 0 0 4px var(--aura-accent-line);
+
+  /* Motion */
+  --aura-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --aura-speed: 160ms;
+}
+
+[data-aura-theme='light'] {
+  --aura-canvas: #f6f7f9;
+  --aura-surface: #ffffff;
+  --aura-elevated: #eef0f3;
+  --aura-overlay: #ffffff;
+
+  --aura-line: #e3e6ea;
+  --aura-line-strong: #cdd2d9;
+
+  --aura-text: #16181c;
+  --aura-muted: #646b74;
+  --aura-faint: #9aa1aa;
+
+  --aura-accent: #16181c;
+  --aura-accent-strong: #000000;
+  --aura-accent-ink: #ffffff;
+  --aura-accent-soft: rgba(22, 24, 28, 0.07);
+  --aura-accent-line: rgba(22, 24, 28, 0.3);
+
+  --aura-positive: #178a52;
+  --aura-positive-soft: rgba(23, 138, 82, 0.1);
+  --aura-warning: #a3690e;
+  --aura-warning-soft: rgba(163, 105, 14, 0.11);
+  --aura-danger: #c23d33;
+  --aura-danger-soft: rgba(194, 61, 51, 0.1);
+  --aura-info: #2669b8;
+  --aura-info-soft: rgba(38, 105, 184, 0.1);
+
+  --aura-shadow-1: 0 1px 2px rgba(20, 24, 30, 0.07);
+  --aura-shadow-2: 0 12px 32px rgba(20, 24, 30, 0.09);
+  --aura-shadow-3: 0 28px 80px rgba(20, 24, 30, 0.14);
+  --aura-glow-accent: 0 0 20px rgba(22, 24, 28, 0.25);
+  --aura-glow-soft: 0 0 40px rgba(22, 24, 28, 0.08);
+
+  --aura-halo-gold: rgba(22, 24, 28, 0.04);
+  --aura-halo-sky: rgba(38, 105, 184, 0.05);
+
+  --aura-focus: 0 0 0 2px var(--aura-canvas), 0 0 0 4px var(--aura-accent-line);
+}
+
+/* Player-prop board: the market surface for one game's linked props.
+   Paper-light by design — light tokens pinned locally. */
+.aura-prop-board {
+  --aura-text: #16181c;
+  --aura-muted: #646b74;
+  --aura-faint: #9aa1aa;
+  --aura-line: #e3e6ea;
+  --aura-surface: #ffffff; --aura-line-strong: #cdd2d9; --aura-accent: #3d6fb0; --aura-accent-strong: #2d5a94; --aura-accent-ink: #ffffff; --aura-accent-soft: rgba(61, 111, 176, 0.1); --aura-accent-line: rgba(61, 111, 176, 0.38);
+  --aura-elevated: #f2f4f6;
+  box-sizing: border-box;
+  width: min(100%, 640px);
+  overflow: hidden;
+  color: var(--aura-text);
+  border: 1px solid var(--aura-line);
+  border-radius: 16px;
+  background: var(--aura-surface);
+  box-shadow: 0 22px 55px rgba(20, 24, 30, .08);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+.aura-prop-board * { box-sizing: border-box; }
+.aura-prop-board > header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--aura-line);
+}
+.aura-prop-board > header span { color: var(--aura-muted); font: 650 9px/1 ui-monospace, monospace; letter-spacing: .09em; text-transform: uppercase; }
+.aura-prop-board > header h3 { margin: 5px 0 0; font-size: 19px; letter-spacing: -.035em; }
+.aura-prop-board > header small { color: var(--aura-muted); font-size: 10px; }
+.aura-prop-board > nav {
+  display: flex;
+  gap: 6px;
+  padding: 12px 20px 0;
+}
+.aura-prop-board > nav button {
+  height: 28px;
+  padding: 0 12px;
+  color: var(--aura-muted);
+  border: 1px solid var(--aura-line);
+  border-radius: 999px;
+  background: var(--aura-surface);
+  font: 600 11px/1 Inter, ui-sans-serif, system-ui, sans-serif;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.aura-prop-board > nav button:hover { color: var(--aura-text); border-color: var(--aura-line-strong); }
+.aura-prop-board > nav button[aria-pressed='true'] {
+  color: var(--aura-accent-ink);
+  border-color: var(--aura-accent);
+  background: var(--aura-accent);
+}
+.aura-prop-board > ol { margin: 0; padding: 6px 0 0; list-style: none; }
+.aura-prop-board > ol > li { padding: 12px 20px 14px; }
+.aura-prop-board > ol > li + li { border-top: 1px solid var(--aura-line); }
+.aura-prop-board > ol > li > header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.aura-prop-board > ol > li > header strong { font-size: 13.5px; letter-spacing: -.015em; }
+.aura-prop-board > ol > li > header small { color: var(--aura-faint); font: 650 9px/1 ui-monospace, monospace; letter-spacing: .07em; }
+.aura-prop-board__props { display: grid; gap: 8px; }
+.aura-prop-board__props article {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 14px;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid var(--aura-line);
+  border-radius: 10px;
+  background: var(--aura-surface);
+}
+.aura-prop-board__props article[data-status='live'] { border-color: rgba(194, 61, 51, .4); }
+.aura-prop-board__props article[data-status='closed'] { background: var(--aura-elevated); }
+.aura-prop-board__market { display: grid; gap: 3px; min-width: 0; }
+.aura-prop-board__market strong { overflow: hidden; font-size: 12.5px; text-overflow: ellipsis; white-space: nowrap; }
+.aura-prop-board__market small { color: var(--aura-muted); font: 500 10px/1.3 ui-monospace, monospace; }
+.aura-prop-board__prices { display: flex; gap: 6px; }
+.aura-prop-board__prices span {
+  display: grid;
+  gap: 2px;
+  min-width: 62px;
+  padding: 6px 10px;
+  border: 1px solid var(--aura-line);
+  border-radius: 8px;
+  background: var(--aura-elevated);
+  text-align: center;
+}
+.aura-prop-board__prices small { color: var(--aura-muted); font: 650 8.5px/1 ui-monospace, monospace; letter-spacing: .06em; text-transform: uppercase; }
+.aura-prop-board__prices b { font: 700 13px/1 ui-monospace, monospace; }
+.aura-prop-board__prices span.is-settled-hit {
+  border-color: var(--aura-accent);
+  background: var(--aura-accent-soft);
+}
+.aura-prop-board__prices span.is-settled-hit b { color: var(--aura-accent); }
+.aura-prop-board__alternates { grid-column: 1 / -1; display: grid; gap: 6px; }
+.aura-prop-board__alternates > button {
+  justify-self: start;
+  padding: 3px 8px;
+  border: 1px solid var(--aura-line);
+  border-radius: 999px;
+  background: none;
+  color: var(--aura-muted);
+  font: 650 9.5px/1 ui-monospace, monospace;
+  letter-spacing: .05em;
+  cursor: pointer;
+}
+.aura-prop-board__alternates > button:hover { color: var(--aura-text); border-color: var(--aura-line-strong); }
+.aura-prop-board__alternates > ul { margin: 0; padding: 0; display: grid; gap: 4px; list-style: none; }
+.aura-prop-board__alternates > ul > li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 10px;
+  border: 1px dashed var(--aura-line);
+  border-radius: 8px;
+}
+.aura-prop-board__alternates > ul > li > small { color: var(--aura-muted); font: 500 10px/1.3 ui-monospace, monospace; }
+.aura-prop-board__alternates > ul > li > span { display: flex; gap: 10px; }
+.aura-prop-board__alternates > ul > li > span small { color: var(--aura-muted); font: 650 8.5px/1 ui-monospace, monospace; text-transform: uppercase; }
+.aura-prop-board__alternates > ul > li > span b { font: 700 11.5px/1 ui-monospace, monospace; }
+.aura-prop-board__settlement {
+  grid-column: 1 / -1;
+  margin: 2px 0 0;
+  color: var(--aura-muted);
+  font: 500 10.5px/1.4 ui-monospace, monospace;
+}
+.aura-prop-board__settlement[data-outcome='void'] { color: var(--aura-faint); }
+.aura-prop-board__empty { padding: 22px 20px; color: var(--aura-muted); font-size: 12.5px; }
+.aura-prop-board > footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 20px;
+  border-top: 1px solid var(--aura-line);
+  color: var(--aura-faint);
+  font: 500 9.5px/1 ui-monospace, monospace;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+@media (max-width: 480px) {
+  .aura-prop-board__props article { grid-template-columns: 1fr; }
+  .aura-prop-board__prices { justify-content: start; }
+}
+

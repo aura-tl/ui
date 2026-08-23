@@ -1,0 +1,118 @@
+{
+  "id": "game-pulse",
+  "displayName": "Aura Game Pulse",
+  "framework": "react-next-app-router",
+  "deliveryMode": "snapshot-plus-resumable-frame-stream",
+  "dataPlane": "aura-only",
+  "dataManifest": {
+    "version": 1,
+    "component": "game-pulse",
+    "delivery": {
+      "primary": "stream",
+      "snapshot": ["game", "game-frame", "metric-catalog", "metric-series", "odds-timeline"],
+      "continuation": "game-frame-stream",
+      "replay": "Follow metric-series nextCursor until complete is true or expose an incomplete tail.",
+      "resume": "Send the last durable event cursor as since; apply only retained metricDeltas from each atomic frame.",
+      "terminal": "A final frame closes live delivery while the completed metric series remains replayable."
+    },
+    "requests": [
+      {
+        "id": "game",
+        "method": "GET",
+        "path": "/api/games/{gameId}",
+        "view": "research",
+        "fields": ["id", "sport", "league", "phase", "statusText", "statusDetail", "startsAtMs", "updatedAt", "teams.away.id", "teams.away.abbreviation", "teams.away.shortName", "teams.away.displayName", "teams.away.name", "teams.away.score", "teams.away.color", "teams.away.record", "teams.home.id", "teams.home.abbreviation", "teams.home.shortName", "teams.home.displayName", "teams.home.name", "teams.home.score", "teams.home.color", "teams.home.record"]
+      },
+      {
+        "id": "game-frame",
+        "method": "GET",
+        "path": "/api/games/{gameId}/frame",
+        "view": "atomic-pulse-frame",
+        "fields": ["cursor", "revision", "gameId", "observedAt", "publishedAt", "scoreboard.sport", "scoreboard.league", "scoreboard.phase", "scoreboard.statusDetail", "scoreboard.statusText", "scoreboard.startsAt", "scoreboard.updatedAt", "scoreboard.away.id", "scoreboard.away.abbreviation", "scoreboard.away.shortName", "scoreboard.away.displayName", "scoreboard.away.name", "scoreboard.away.score", "scoreboard.away.color", "scoreboard.away.record", "scoreboard.home.id", "scoreboard.home.abbreviation", "scoreboard.home.shortName", "scoreboard.home.displayName", "scoreboard.home.name", "scoreboard.home.score", "scoreboard.home.color", "scoreboard.home.record", "freshness.dataAsOf", "freshness.state", "metricDeltas[].metric", "metricDeltas[].value"]
+      },
+      {
+        "id": "metric-catalog",
+        "method": "GET",
+        "path": "/api/games/{gameId}/metrics",
+        "view": "metric-catalog",
+        "fields": ["gameId", "metrics[].definitionId"],
+        "definitions": ["sport.game.win_probability", "sport.game.score", "baseball.game.inning_number", "baseball.game.inning_state", "basketball.game.period_number"]
+      },
+      {
+        "id": "metric-series",
+        "method": "GET",
+        "path": "/api/games/{gameId}/metric-series",
+        "view": "change-only-series",
+        "fields": ["gameId", "complete", "hasMore", "nextCursor", "series.metric", "series.definitionId", "series.points.observedAt", "series.points.value"],
+        "parameters": ["definitionId={presentDefinitionIds}", "fields=series.metric,series.definitionId,series.points.observedAt,series.points.value", "limit=500", "cursor={opaqueCursor}"]
+      },
+      {
+        "id": "odds-timeline",
+        "method": "GET",
+        "path": "/api/games/{gameId}/odds/timeline",
+        "view": "aura.game.odds-timeline@1.0.0",
+        "fields": ["kind", "contractVersion", "gameId", "marketType", "points[].observedAt", "points[].outcomes[].side", "points[].outcomes[].line", "points[].outcomes[].price"],
+        "parameters": ["marketType={moneyline|spread|total}"]
+      },
+      {
+        "id": "game-frame-stream",
+        "method": "GET",
+        "path": "/api/events/stream",
+        "view": "game.frame",
+        "fields": ["id", "createdAt", "type", "payload"],
+        "payloadRequest": "game-frame",
+        "parameters": ["type=game.frame", "gameId={gameId}", "since={durableCursor}"]
+      },
+      {
+        "id": "activation-coverage",
+        "method": "GET",
+        "path": "/api/coverage",
+        "view": "product-coverage",
+        "fields": ["sports[].sport"],
+        "purpose": "Credential-safe activation doctor only; not part of the render hot path."
+      }
+    ],
+    "relationships": ["Game.id -> GameFrame.gameId", "Game.id -> MetricSeries.gameId", "MetricDefinition.id -> MetricSeries.definitionId", "Game.id -> OddsTimeline.gameId", "Game.id -> game.frame.gameId", "GameFrame.metricDeltas.metric -> retained MetricSeries.metric"],
+    "unavailable": ["Both teams need independently retained win-probability series; Aura never infers the missing side.", "Score margin is unavailable when either team lacks a retained score series.", "Inning or period bands render only from retained categorical state.", "A stopped metric cursor exposes metric_series_tail instead of claiming a complete replay.", "Connected errors never replace real partial data with fixture values."]
+  },
+  "requires": [
+    "react",
+    "next"
+  ],
+  "registryDependencies": [
+    "live-scoreboard"
+  ],
+  "files": [
+    {
+      "source": "game-pulse-types.ts",
+      "destination": "lib/aura/game-pulse-types.ts"
+    },
+    {
+      "source": "use-game-pulse.ts",
+      "destination": "hooks/aura/use-game-pulse.ts"
+    },
+    {
+      "source": "game-pulse.tsx",
+      "destination": "components/aura/game-pulse.tsx"
+    },
+    {
+      "source": "game-pulse.css",
+      "destination": "styles/aura-game-pulse.css"
+    },
+    {
+      "source": "fixture.ts",
+      "destination": "fixtures/aura/game-pulse.ts"
+    },
+    {
+      "source": "recipe.json",
+      "destination": "aura/recipes/game-pulse.json"
+    }
+  ],
+  "nextSteps": [
+    "1. Import styles/aura-game-pulse.css once in your app shell.",
+    "2. Render fixtures/aura/game-pulse.ts immediately without a key.",
+    "3. Set AURA_API_URL plus AURA_API_KEY, or AURA_API_URL plus RAPIDAPI_KEY and RAPIDAPI_HOST, in server-only environment variables.",
+    "4. Bind createAuraLiveScoreboardClient() and useAuraGamePulse() to one Aura game id for paid live or replay data.",
+    "5. Run npx --yes --package=github:aura-tl/ui#v0.1.0 -- aura-ui doctor game-pulse to verify fixture or paid-data activation without exposing the credential."
+  ]
+}

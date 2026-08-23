@@ -1,0 +1,273 @@
+/* Generated from @aura/ui-themes by sync-registry-styles.mjs — do not hand-edit.
+ * Regenerate: node packages/ui/cli/scripts/sync-registry-styles.mjs */
+
+/*
+ * Aura design tokens.
+ *
+ * Night + white-hot glow: a deep, cool night canvas where the accent is
+ * pure white light — buttons, active states, and live elements glow like
+ * an aura. No brand hue; light itself is the brand. Status colors are
+ * bright and cool so they pop against the dark.
+ * A clean light theme exists under data-aura-theme="light".
+ */
+
+:root {
+  /* Surfaces — cool night */
+  --aura-canvas: #08090b;
+  --aura-surface: #0e1013;
+  --aura-elevated: #15181d;
+  --aura-overlay: #1c2027;
+
+  /* Lines */
+  --aura-line: #1f232a;
+  --aura-line-strong: #2f353e;
+
+  /* Ink */
+  --aura-text: #f5f7fa;
+  --aura-muted: #9aa3ae;
+  --aura-faint: #5d6570;
+
+  /* Accent — white light */
+  --aura-accent: #ffffff;
+  --aura-accent-strong: #dfe5ec;
+  --aura-accent-ink: #0a0b0d;
+  --aura-accent-soft: rgba(255, 255, 255, 0.08);
+  --aura-accent-line: rgba(255, 255, 255, 0.35);
+
+  /* Semantic status — bright on night */
+  --aura-positive: #7fe0a8;
+  --aura-positive-soft: rgba(127, 224, 168, 0.12);
+  --aura-warning: #ffd47e;
+  --aura-warning-soft: rgba(255, 212, 126, 0.12);
+  --aura-danger: #ff8a7e;
+  --aura-danger-soft: rgba(255, 138, 126, 0.12);
+  --aura-info: #8fc2ff;
+  --aura-info-soft: rgba(143, 194, 255, 0.12);
+
+  /* Type */
+  --aura-font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --aura-font-mono: 'DM Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --aura-label: 700 10px/1 var(--aura-font-mono);
+  --aura-label-tracking: 0.12em;
+
+  /* Radius */
+  --aura-radius-sm: 6px;
+  --aura-radius-md: 10px;
+  --aura-radius-lg: 14px;
+  --aura-radius-xl: 20px;
+  --aura-radius-full: 999px;
+  --aura-radius: var(--aura-radius-lg);
+
+  /* Elevation + glow */
+  --aura-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --aura-shadow-2: 0 12px 32px rgba(0, 0, 0, 0.44);
+  --aura-shadow-3: 0 28px 80px rgba(0, 0, 0, 0.55);
+  --aura-glow-accent: 0 0 22px rgba(255, 255, 255, 0.38);
+  --aura-glow-soft: 0 0 44px rgba(255, 255, 255, 0.1);
+
+  /* Halo washes for heroes and stages */
+  --aura-halo-gold: rgba(255, 255, 255, 0.055);
+  --aura-halo-sky: rgba(143, 194, 255, 0.05);
+
+  /* Focus */
+  --aura-focus: 0 0 0 2px var(--aura-canvas), 0 0 0 4px var(--aura-accent-line);
+
+  /* Motion */
+  --aura-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --aura-speed: 160ms;
+}
+
+[data-aura-theme='light'] {
+  --aura-canvas: #f6f7f9;
+  --aura-surface: #ffffff;
+  --aura-elevated: #eef0f3;
+  --aura-overlay: #ffffff;
+
+  --aura-line: #e3e6ea;
+  --aura-line-strong: #cdd2d9;
+
+  --aura-text: #16181c;
+  --aura-muted: #646b74;
+  --aura-faint: #9aa1aa;
+
+  --aura-accent: #16181c;
+  --aura-accent-strong: #000000;
+  --aura-accent-ink: #ffffff;
+  --aura-accent-soft: rgba(22, 24, 28, 0.07);
+  --aura-accent-line: rgba(22, 24, 28, 0.3);
+
+  --aura-positive: #178a52;
+  --aura-positive-soft: rgba(23, 138, 82, 0.1);
+  --aura-warning: #a3690e;
+  --aura-warning-soft: rgba(163, 105, 14, 0.11);
+  --aura-danger: #c23d33;
+  --aura-danger-soft: rgba(194, 61, 51, 0.1);
+  --aura-info: #2669b8;
+  --aura-info-soft: rgba(38, 105, 184, 0.1);
+
+  --aura-shadow-1: 0 1px 2px rgba(20, 24, 30, 0.07);
+  --aura-shadow-2: 0 12px 32px rgba(20, 24, 30, 0.09);
+  --aura-shadow-3: 0 28px 80px rgba(20, 24, 30, 0.14);
+  --aura-glow-accent: 0 0 20px rgba(22, 24, 28, 0.25);
+  --aura-glow-soft: 0 0 40px rgba(22, 24, 28, 0.08);
+
+  --aura-halo-gold: rgba(22, 24, 28, 0.04);
+  --aura-halo-sky: rgba(38, 105, 184, 0.05);
+
+  --aura-focus: 0 0 0 2px var(--aura-canvas), 0 0 0 4px var(--aura-accent-line);
+}
+
+/* League analytics: one Aura Landscape response, three focused presentations. */
+.aura-stat-leaderboard,
+.aura-metric-bars,
+.aura-metric-scatter {
+  --aura-text: #16181c;
+  --aura-muted: #646b74;
+  --aura-line: #e3e6ea;
+  --aura-surface: #ffffff; --aura-line-strong: #cdd2d9; --aura-accent: #3d6fb0; --aura-accent-strong: #2d5a94; --aura-accent-ink: #ffffff; --aura-accent-soft: rgba(61, 111, 176, 0.1); --aura-accent-line: rgba(61, 111, 176, 0.38);
+  box-sizing: border-box;
+  width: min(100%, 860px);
+  overflow: hidden;
+  color: var(--aura-text);
+  border: 1px solid var(--aura-line);
+  border-radius: 16px;
+  background: var(--aura-surface);
+  box-shadow: 0 22px 60px rgba(55, 48, 37, .08);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+.aura-metric-scatter { width: min(100%, 1060px); }
+.aura-stat-leaderboard *, .aura-metric-bars *, .aura-metric-scatter * { box-sizing: border-box; }
+.aura-analytics-header { display: flex; align-items: end; justify-content: space-between; gap: 20px; padding: 22px 24px 18px; border-bottom: 1px solid var(--aura-line); }
+.aura-analytics-header small { color: #3d6fb0; font: 700 9px/1 ui-monospace, monospace; letter-spacing: .09em; text-transform: uppercase; }
+.aura-analytics-header h2 { margin: 6px 0 0; font-size: clamp(22px, 4vw, 34px); line-height: 1; letter-spacing: -.05em; }
+.aura-analytics-header > span { color: var(--aura-muted); font-size: 9px; text-align: right; }
+.aura-analytics-footer { display: flex; justify-content: space-between; gap: 18px; padding: 11px 24px; color: var(--aura-muted); border-top: 1px solid var(--aura-line); background: #f2f4f6; font: 600 8px/1.3 ui-monospace, monospace; text-transform: uppercase; }
+.aura-metric-scatter__body { display: grid; grid-template-columns: minmax(0, 1fr) 210px; gap: 0; min-height: 470px; }
+.aura-metric-scatter__plot { min-width: 0; overflow: hidden; border-right: 1px solid var(--aura-line); background: radial-gradient(circle at 50% 30%, rgba(85,82,186,.045), transparent 50%), #ffffff; }
+.aura-metric-scatter__plot svg { display: block; width: 100%; height: 100%; min-height: 430px; overflow: visible; }
+.aura-metric-scatter__grid line { stroke: #e8e3da; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.aura-metric-scatter__grid line.is-median { stroke: #c6c0b5; stroke-dasharray: 4 5; }
+.aura-metric-scatter__points g { cursor: crosshair; outline: none; }
+.aura-metric-scatter__points circle { fill: #3d6fb0; stroke: #ffffff; stroke-width: 2; opacity: .72; transition: r .14s ease, opacity .14s ease; vector-effect: non-scaling-stroke; }
+.aura-metric-scatter__points g:hover circle,
+.aura-metric-scatter__points g:focus circle,
+.aura-metric-scatter__points g.is-active circle { fill: #211e16; opacity: 1; }
+.aura-metric-scatter__points g.is-frontier circle { fill: #a3690e; opacity: .95; }
+.aura-metric-scatter__points text { fill: #16181c; paint-order: stroke; stroke: #ffffff; stroke-width: 4px; font: 650 8px/1 ui-monospace, monospace; pointer-events: none; }
+.aura-metric-scatter__crosshair line { stroke: #646b74; stroke-width: 1; stroke-dasharray: 2 4; vector-effect: non-scaling-stroke; }
+.aura-metric-scatter__axes text { fill: #646b74; font: 600 8px/1 ui-monospace, monospace; text-transform: uppercase; }
+.aura-metric-scatter__inspector { display: flex; flex-direction: column; min-width: 0; padding: 24px 20px; background: #f7f4ed; }
+.aura-metric-scatter__inspector > span { color: #3d6fb0; font: 700 8px/1 ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; }
+.aura-metric-scatter__inspector h3 { margin: 8px 0 22px; font-size: 24px; line-height: .95; letter-spacing: -.05em; }
+.aura-metric-scatter__inspector dl { display: grid; gap: 8px; margin: 0; }
+.aura-metric-scatter__inspector dl div { display: grid; gap: 6px; padding: 11px; border: 1px solid var(--aura-line); border-radius: 9px; background: #ffffff; }
+.aura-metric-scatter__inspector dt { color: var(--aura-muted); font-size: 8px; }
+.aura-metric-scatter__inspector dd { margin: 0; font: 700 18px/1 ui-monospace, monospace; }
+.aura-metric-scatter__inspector p { margin: auto 0 7px; color: var(--aura-muted); font-size: 9px; line-height: 1.5; }
+.aura-metric-scatter__inspector p strong { color: var(--aura-text); }
+.aura-metric-scatter__inspector > small { color: var(--aura-muted); font-size: 8px; text-transform: uppercase; }
+@media (max-width: 700px) {
+  .aura-analytics-header { align-items: start; flex-direction: column; }
+  .aura-analytics-header > span { text-align: left; }
+  .aura-metric-scatter__body { grid-template-columns: 1fr; }
+  .aura-metric-scatter__plot { border-right: 0; border-bottom: 1px solid var(--aura-line); }
+  .aura-metric-scatter__plot svg { min-height: 330px; }
+  .aura-metric-scatter__inspector { min-height: 190px; }
+  .aura-metric-scatter__inspector p { margin-top: 20px; }
+  .aura-analytics-footer { align-items: start; flex-direction: column; gap: 5px; }
+}
+/* ==========================================================================
+   Motion — entrance animation + the Alive guided data walk.
+   Charts draw themselves in; Alive mode strolls the data, revealing who
+   each point is. Everything here honors prefers-reduced-motion.
+   ========================================================================== */
+
+/* ------------------------------------------------------------ alive toggle */
+
+.aura-alive {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 26px;
+  padding: 0 11px;
+  border: 1px solid var(--aura-line-strong, #d6d0c0);
+  border-radius: var(--aura-radius-full, 999px);
+  background: transparent;
+  color: var(--aura-muted, #6f6a5b);
+  font: 700 10px/1 var(--aura-font-mono, monospace);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color var(--aura-speed, 160ms) var(--aura-ease, ease),
+    border-color var(--aura-speed, 160ms) var(--aura-ease, ease),
+    background var(--aura-speed, 160ms) var(--aura-ease, ease);
+}
+.aura-alive i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.5;
+}
+.aura-alive:hover { color: var(--aura-text, #211e16); }
+.aura-alive:focus-visible { outline: none; box-shadow: var(--aura-focus); }
+.aura-alive.is-on {
+  border-color: var(--aura-accent-line, rgba(176, 132, 26, 0.42));
+  background: var(--aura-accent-soft, rgba(199, 155, 43, 0.13));
+  color: var(--aura-accent, #9c7413);
+}
+.aura-alive.is-on i {
+  opacity: 1;
+  box-shadow: 0 0 10px currentColor;
+  animation: aura-alive-breathe 1.8s ease-in-out infinite;
+}
+/* ------------------------------------------------- scatter roamer + walk */
+
+.aura-metric-scatter__points g circle {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: r 0.3s var(--aura-ease, ease);
+  animation: aura-chart-pop 0.45s var(--aura-ease, ease) backwards;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+.aura-metric-scatter__points g text { animation: aura-fade-rise 0.5s var(--aura-ease, ease) backwards; }
+.aura-metric-scatter__crosshair rect {
+  fill: var(--aura-line-strong, #d6d0c0);
+  transition: x 0.9s var(--aura-ease, ease), y 0.9s var(--aura-ease, ease),
+    width 0.9s var(--aura-ease, ease), height 0.9s var(--aura-ease, ease);
+}
+.aura-metric-scatter__roamer circle {
+  transition: cx 0.9s var(--aura-ease, ease), cy 0.9s var(--aura-ease, ease);
+  pointer-events: none;
+}
+.aura-metric-scatter__roamer-halo {
+  fill: var(--aura-accent-soft, rgba(199, 155, 43, 0.13));
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: aura-chart-beacon 2.4s ease-in-out infinite;
+}
+.aura-metric-scatter__roamer-ring {
+  fill: none;
+  stroke: var(--aura-accent, #9c7413);
+  stroke-width: 2;
+}
+/* -------------------------------------------------------------- fade swap */
+
+.aura-fade-swap { animation: aura-fade-rise 0.45s var(--aura-ease, ease); }
+
+@keyframes aura-alive-breathe {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.72); opacity: 0.55; }
+}
+@keyframes aura-chart-pop {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes aura-chart-beacon {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.45); opacity: 0.62; }
+}
+@keyframes aura-fade-rise {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}

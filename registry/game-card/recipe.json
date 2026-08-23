@@ -1,0 +1,74 @@
+{
+  "id": "aura.game-card.react-next",
+  "component": "game-card",
+  "dataPlane": "aura-only",
+  "deliveryMode": "snapshot",
+  "dataManifest": {
+    "version": 1,
+    "component": "game-card",
+    "delivery": {
+      "primary": "fetch",
+      "snapshot": [
+        "game-card"
+      ]
+    },
+    "requests": [
+      {
+        "id": "game-card",
+        "method": "GET",
+        "path": "/api/games/{gameId}",
+        "view": "card",
+        "fields": [
+          "id",
+          "sport",
+          "league",
+          "phase",
+          "startsAtMs",
+          "teams.away.id",
+          "teams.away.abbreviation",
+          "teams.away.displayName",
+          "teams.away.score",
+          "teams.away.record",
+          "teams.home.id",
+          "teams.home.abbreviation",
+          "teams.home.displayName",
+          "teams.home.score",
+          "teams.home.record"
+        ]
+      },
+      {
+        "id": "activation-coverage",
+        "method": "GET",
+        "path": "/api/coverage",
+        "view": "product-coverage",
+        "fields": [
+          "sports[].sport",
+          "sports[].availability"
+        ]
+      }
+    ],
+    "relationships": [
+      "Game.id is the component gameId"
+    ],
+    "unavailable": [
+      "A missing game renders an unavailable message, never fixture data while connected.",
+      "The card omits optional records or notes when Aura does not return them."
+    ]
+  },
+  "objects": [
+    "Game",
+    "Coverage"
+  ],
+  "instructions": [
+    "Render auraGameCardFixture before connecting data.",
+    "Create one server-safe Aura client and pass it with an Aura game id to useAuraGameCard().",
+    "The card requests the compact Game card projection only."
+  ],
+  "customization": {
+    "howTo": "To pull more or fewer fields, edit the fields= list in this component\u2019s client and the matching *-types.ts. Allowlists are published per object in GET /api/catalog (fieldCatalog); unknown or duplicate fields return 400.",
+    "fieldCatalogObjects": [
+      "game-detail"
+    ],
+    "docs": "docs/component-data-customization.md"
+  }
+}

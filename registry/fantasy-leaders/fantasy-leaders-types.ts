@@ -1,0 +1,7 @@
+import type { AuraGameBoxScore } from '@/lib/aura/live-scoreboard-types';
+import { toAuraFantasyLeaderModels, type AuraFantasyPlayerLineModel, type AuraFantasyScoring } from '@/lib/aura/fantasy-player-line-types';
+export interface AuraFantasyLeadersModel { gameId: string; title: string; status: string; scoringLabel: string; players: AuraFantasyPlayerLineModel[]; }
+export interface AuraFantasyLeadersState { status: 'loading' | 'ready' | 'unavailable' | 'error'; model: AuraFantasyLeadersModel | null; error: string | null; }
+export function toAuraFantasyLeadersModel(boxScore: AuraGameBoxScore, scoring?: AuraFantasyScoring, limit = 10): AuraFantasyLeadersModel { const players = toAuraFantasyLeaderModels(boxScore, scoring, limit); const teams = teamNames(boxScore); return { gameId: boxScore.gameId, title: teams.length > 1 ? `${teams[0]} at ${teams[1]}` : String(boxScore.league || boxScore.sport || 'Game'), status: String(boxScore.phase || 'Latest'), scoringLabel: scoring ? 'Custom' : 'PPR', players }; }
+function teamNames(input: AuraGameBoxScore): string[] { const teams = Array.isArray(input.teams) ? input.teams : Object.values(object(input.teams)); return teams.map((raw, index) => { const row = object(raw); const identity = object(row.team); return String(row.abbreviation || identity.abbreviation || `T${index + 1}`); }); }
+function object(value: unknown): Record<string, unknown> { return value && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : {}; }
