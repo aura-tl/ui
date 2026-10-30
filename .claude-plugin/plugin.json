@@ -1,0 +1,9 @@
+{
+  "name": "aura",
+  "version": "1.0.0",
+  "description": "Live sports data: scores, play-by-play, box scores, rosters, odds and player props from sportsbooks, Kalshi and Polymarket. NFL, college football, NBA, NHL, college basketball, MLB, WNBA.",
+  "author": { "name": "Aura", "url": "https://aura.tl" },
+  "homepage": "https://aura.tl",
+  "repository": "https://github.com/aura-tl/ui",
+  "keywords": ["sports", "odds", "nfl", "nba", "mlb", "nhl", "betting", "kalshi", "polymarket", "mcp"]
+}

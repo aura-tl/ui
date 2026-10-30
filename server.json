@@ -1,0 +1,24 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "tl.aura/aura",
+  "title": "Aura",
+  "description": "Live sports data: scores, play-by-play, box scores, odds and props. No key needed to start.",
+  "websiteUrl": "https://aura.tl",
+  "repository": { "url": "https://github.com/aura-tl/ui", "source": "github" },
+  "version": "1.0.0",
+  "icons": [{ "src": "https://raw.githubusercontent.com/aura-tl/ui/main/icon.png", "mimeType": "image/png", "sizes": ["512x512"] }],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://aura.tl/mcp",
+      "headers": [
+        {
+          "name": "x-api-key",
+          "description": "Optional Aura API key. Without one, each connection starts on a 1,000-request trial.",
+          "isRequired": false,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}
