@@ -1,0 +1,50 @@
+{
+  "name": "aura",
+  "version": "1.0.0",
+  "description": "Live sports data: schedules, live scores, play-by-play, box scores, rosters, odds and player props from sportsbooks and the Kalshi and Polymarket prediction markets, with line movement and settled results.",
+  "author": {
+    "name": "Reid Watson Software LLC",
+    "email": "admin@aura.tl",
+    "url": "https://aura.tl"
+  },
+  "homepage": "https://aura.tl",
+  "repository": "https://github.com/aura-tl/ui",
+  "keywords": [
+    "sports",
+    "odds",
+    "nfl",
+    "nba",
+    "mlb",
+    "nhl",
+    "college football",
+    "kalshi",
+    "polymarket"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Aura",
+    "shortDescription": "Live sports scores and odds",
+    "longDescription": "Aura brings live sports data into ChatGPT. Ask for tonight's games with odds, a live score and situation, a box score, play-by-play, a team's roster, or how a line has moved, and the answer comes from Aura's data instead of a web search.\n\nCovers NFL, college football, NBA, NHL, college basketball, MLB and WNBA: schedules, live scores and game state, play-by-play, box scores, teams, rosters and players, plus moneylines, spreads, totals and player props from sportsbooks and the Kalshi and Polymarket prediction markets, each priced on both sides, with line movement and settled results.\n\nNo account needed. Each connection starts with 1,000 free requests. Verifying an email in chat makes it 50,000 a month free; Pro is $20 a month for 500,000.",
+    "developerName": "Reid Watson Software LLC",
+    "category": "Sports",
+    "capabilities": [
+      "Today's games and live scores for NFL, college football, NBA, NHL, college basketball, MLB and WNBA",
+      "Moneyline, spread, total and player prop odds by source, including Kalshi and Polymarket",
+      "Line movement from open to now",
+      "Box scores, play-by-play and live game situation",
+      "Teams, rosters and player profiles"
+    ],
+    "websiteURL": "https://aura.tl",
+    "supportURL": "https://github.com/aura-tl/ui/issues",
+    "privacyPolicyURL": "https://aura.tl/privacy",
+    "termsOfServiceURL": "https://aura.tl/terms",
+    "defaultPrompt": [
+      "What are tonight's NBA games with odds?",
+      "What's the score of the Lakers game right now?",
+      "How has the spread moved for this week's Chiefs game?"
+    ],
+    "composerIcon": "./icon.png",
+    "logo": "./icon.png"
+  }
+}
